@@ -6,7 +6,7 @@ import pandas as pd
 #import mysql.connector
 
 from flask import request, session
-#from werkzeug.utils import secure_filename
+from werkzeug.utils import secure_filename
 
 root_path = os.path.dirname(os.path.abspath(__file__))
 
