@@ -101,7 +101,7 @@ def check_user(email,password):
     if email.lower()=="admin@masoritherapeutics.com" and password=="Masori123$":
         return True, 'Admin', 'Admin'
     else:
-        return True, 'User', 'User'
+        return True, 'User', email
 
 
 def get_register_table():
