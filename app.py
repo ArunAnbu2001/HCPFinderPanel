@@ -1,4 +1,5 @@
 import json
+import db_proxy
 from flask import Flask, render_template, request, session
 
 
