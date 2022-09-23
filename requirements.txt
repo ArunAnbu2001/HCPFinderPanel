@@ -2,3 +2,4 @@ flask
 mysql-connector-python==8.0.29
 pandas
 requests
+Werkzeug==2.2.2
