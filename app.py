@@ -125,5 +125,5 @@ def logout():
 
     return status
 
-app.run(port=4848)
-
+if __name__ == '__main__':
+    app.run()
