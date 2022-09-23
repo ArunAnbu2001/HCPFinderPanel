@@ -98,7 +98,10 @@ def check_user(email,password):
     # else:
     #     usertype = 'User'
     #     name = user['Firstname'].to_list()[0] + " " + user['Lastname'].to_list()[0]
-    return True, 'admin', 'Admin'
+    if email.lower()=="admin@masoritherapeutics.com" and password=="Masori123$":
+        return True, 'Admin', 'Admin'
+    else:
+        return True, 'User', 'User'
 
 
 def get_register_table():
@@ -130,7 +133,23 @@ def get_register_table():
     
     # ret_data = pd.DataFrame(new_dfs)
     
-    return ""
+    new_df={
+        "Id":0,
+        "Firstname":"",
+        "Lastname":"",
+        "ContactNumber":"",
+        "Email":"",
+        "Address":"",
+        "Designation":"",
+        "Status":"",
+        "Reason":"",
+        "License":"",
+        "NPI":""
+    }
+    new_dfs = []
+    new_dfs.append(new_df)
+    ret_data = pd.DataFrame(new_dfs)
+    return ret_data
 
 
 def bulk_upload():
@@ -565,9 +584,5 @@ def reject_mail(firstname, lastname, email):
     """
     mail.SendMail(email, "Your staus have been changed - HCP Finder", body, [])
     return       
-
-
-
-               
 
 
