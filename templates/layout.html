@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Home - MASORI</title>
+    <link rel="icon" href="{{url_for('static',filename='images/favicon.ico')}}" type="image/gif" sizes="16x16">
+
+    <!--  -->
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'plugins/bootstrap-5.0.2/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'plugins/bootstrap-5.0.2/bootstrap-extended.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'plugins/select2/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/timeline.css') }}">
+
+    <!-- Data Tables -->
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'plugins/datatable/dataTables.bootstrap5.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'plugins/datatable/responsive.bootstrap5.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'plugins/datatable/buttons.bootstrap5.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'plugins/datatable/rowGroup.bootstrap5.min.css') }}">
+    <!--  -->
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'plugins/sweetalert2/sweetalert2.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'plugins/toastr/toastr.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'plugins/toastr/ext-component-toastr.min.css') }}">
+
+    <!--  -->
+    <script src="{{ url_for('static', filename= 'plugins/jquery-3.6.0/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ url_for('static', filename= 'plugins/bootstrap-5.0.2/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename= 'plugins/fontawesome-5.15.3/fontawesome.min.js') }}"></script>
+    <script src="{{ url_for('static', filename= 'plugins/select2/select2.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/gh/linways/table-to-excel@v1.0.4/dist/tableToExcel.js"></script>
+
+    <!-- Data Tables -->
+    <script src="{{ url_for('static', filename= 'plugins/datatable/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ url_for('static', filename= 'plugins/datatable/datatables.buttons.min.js') }}"></script>
+    <script src="{{ url_for('static', filename= 'plugins/datatable/dataTables.bootstrap5.min.js') }}"></script>
+    <script src="{{ url_for('static', filename= 'plugins/datatable/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ url_for('static', filename= 'plugins/datatable/responsive.bootstrap5.js') }}"></script>
+    <script src="{{ url_for('static', filename= 'plugins/datatable/jszip.min.js') }}"></script>
+    <script src="{{ url_for('static', filename= 'plugins/datatable/pdfmake.min.js') }}"></script>
+    <script src="{{ url_for('static', filename= 'plugins/datatable/vfs_fonts.js') }}"></script>
+    <script src="{{ url_for('static', filename= 'plugins/datatable/buttons.html5.min.js') }}"></script>
+    <script src="{{ url_for('static', filename= 'plugins/datatable/buttons.print.min.js') }}"></script>
+    <script src="{{ url_for('static', filename= 'plugins/datatable/dataTables.rowGroup.min.js') }}"></script>
+    <!--  -->
+    <script src="{{ url_for('static', filename= 'plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
+    <script src="{{ url_for('static', filename= 'plugins/toastr/toastr.min.js') }}"></script>
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+
+</head>
+
+<body>
+    <style>
+        #processing {
+            display: none;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background-color: black;
+            opacity: 0.6;
+            position: fixed;
+            color: white;
+            text-align: center;
+            padding-top: 20%;
+            font-size: 16pt;
+            font-weight: 500;
+        }
+        
+    </style>
+
+    <div id="processing">Please Wait . . . This may take a while.</div>
+    {% include 'nav.html' %} {% block content %} {% endblock %}
+
+</body>
+
+</html>

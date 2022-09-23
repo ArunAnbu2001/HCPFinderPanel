@@ -1,0 +1,125 @@
+{% extends 'layout.html' %} {% block content %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Change Password - Masori</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .correction {
+            padding-right: 0px;
+            padding-left: 0px;
+        }
+        
+        .container-content {
+            margin-top: 140px;
+            margin-bottom: 1em;
+        }
+    </style>
+
+    <body>
+        <!--  -->
+        <section class="vh-90">
+            <div class="container-content ">
+                <!-- <div class="menu-card-container"> -->
+                <!-- <div class="container-fluid h-custom"> -->
+                <div class="row justify-content-center align-items-center h-100">
+                    <!-- <div class="col-md-9 col-lg-6 col-xl-5">
+                <img src="{{ url_for('static', filename= 'images/logo-green.png') }}" class="img-fluid" alt="Logo"> -->
+
+                    <div class="col-md-7 col-lg-6 col-xl-4 offset-xl-1">
+                        <!-- <div>
+                    <h4>{{ message }}</h4><br>
+                </div> -->
+                        <!-- Email input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="form3Example3">Current Password<span style="color:red">*</span></label>
+                            <input type="password" padding-left='15px' padding-right="15px" name="currentpassword" id="currentpassword" class="form-control form-control-lg" placeholder="Enter current password" />
+                        </div>
+                        <!-- Email input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="form3Example3">New Password<span style="color:red">*</span></label>
+                            <input type="password" name="newpassword" id="newpassword" class="form-control form-control-lg" placeholder="Enter new password" />
+                        </div>
+
+                        <!-- Password input -->
+                        <div class="form-outline mb-3">
+                            <label class="form-label" for="form3Example4">Confirm New Password<span style="color:red">*</span></label>
+                            <input type="password" name="confirmnewpassword" id="confirmnewpassword" class="form-control form-control-lg" placeholder="Confirm new password" />
+                        </div>
+
+
+                        <div class="text-center text-lg-start mt-4 pt-2">
+                            <button class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;" onclick="setnewpassword()">Save</button>
+                            <br>
+                            <p>
+                                <div id="out-message" style="color: red; display: none;"></div>
+                            </p>
+                            </br>
+                            <div id="success" style="color:  #1fbf55; font-size:18px; font-weight:bold; display: none;"></div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+        </section>
+    </body>
+
+
+    <script>
+        function setnewpassword() {
+
+            var data = new FormData();
+            var number = /(?=.{8,})/;
+            let strongpassword = new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])')
+
+            data.append('currentpassword', $("#currentpassword").val());
+            data.append('newpassword', $("#newpassword").val());
+
+            if ($('#currentpassword').val() == '' || $('#newpassword').val() == '' || $('#confirmnewpassword').val() == '') {
+                $("#out-message").text('Please fill all the mandatory fields..').show(400).delay(4000).hide('slow');
+            } else if ($('#newpassword').val() != $('#confirmnewpassword').val()) {
+                $("#out-message").text('new password and confirm new password not same.').show(400).delay(4000).hide('slow')
+            } else if (($("#currentpassword").val() == $('#newpassword').val())) {
+                $("#out-message").text('current password and new password are same.').show(400).delay(4000).hide('slow')
+            } else if (!strongpassword.test($('#newpassword').val())) {
+                $("#out-message").text('Suggest a strong password.. Ex.AB@cd123').show(400).delay(4000).hide('slow');
+            } else if (!number.test($('#newpassword').val())) {
+                $("#out-message").text('Password length must be 8 characters').show(400).delay(4000).hide('slow')
+            } else {
+                $('#processing').show();
+                $.ajax({
+                    type: 'POST',
+                    enctype: 'multipart/form-data',
+                    url: './change_password',
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    timeout: 800000,
+                    data: data,
+                    success: function(data) {
+                        debugger;
+                        if (data == "true") {
+
+                            $("#success").text('You have successfully changed password.').show(600).delay(4000).hide('slow');
+                            setTimeout(function() {
+                                window.location = "./home";
+                            }, 2000);
+                        } else {
+                            $("#out-message").text('Invalid current password').show(400).delay(4000).hide('slow');
+                        }
+                        $('#processing').hide();
+                    },
+                    error: function(err) {
+                        $(this).html("error!");
+                        $('#processing').hide();
+                    }
+                });
+            }
+        }
+    </script>
+
+</html>
+{% endblock %}

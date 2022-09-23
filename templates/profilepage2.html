@@ -1,0 +1,302 @@
+{% extends 'layout.html' %} {% block content %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Edit Profile - Masori</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--  -->
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'plugins/bootstrap-5.0.2/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'plugins/select2/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+    <!--  -->
+    <style>
+        .correction {
+            padding-right: 0px;
+            padding-left: 0px;
+        }
+        
+        .form-control {
+            height: 40px;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+        }
+        
+        .form-label {
+            margin-bottom: 0.2rem;
+            font-size: 15px;
+        }
+        
+        .container-content {
+            margin-top: 110px;
+            margin-bottom: 1em;
+        }
+    </style>
+
+    <body>
+        <section>
+            <div class="container content-container">
+                <div class="container-content">
+                    <!-- <div class="menu-card-container"> -->
+                    <p>
+                        <center><span class="form-label" style="font-weight: bold; font-size: 20px">PROFILE</span></center>
+                    </p>
+                    <div class="row">
+                        <div class="col-correction">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="form-label">First Name</label>
+                                    <input class="form-control" name="firstname" id="firstname" placeholder="First Name" readonly>
+                                </div>
+                                <div class="col-4">
+                                    <label class="form-label">Last Name</label>
+                                    <input class="form-control" name="lastsname" id="lastname" placeholder="Last Name" readonly>
+                                </div>
+
+                                <div class="col-4">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" class="form-control" name="Email" id="Email" placeholder="Enter a valid email address" readonly>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-correction">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="form-label">Contact Number</label>
+                                    <input class="form-control" type="number" name="Contact" id="Contact" placeholder="Enter your contact number" readonly>
+                                </div>
+                                <div class="col-4">
+                                    <label class="form-label">Designation</label>
+                                    <input class="form-control" name="Designation" id="Designation" placeholder="Your designation" readonly>
+                                </div>
+                                <div class="col-4">
+                                    <label class="form-label">Street</label>
+                                    <input class="form-control" name="Street" id="Street" placeholder="Your street" readonly>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-correction">
+                            <div class="row">
+
+                                <div class="col-4">
+                                    <label class="form-label">City</label>
+                                    <input class="form-control" name="City" id="City" placeholder="Your area" readonly>
+                                </div>
+                                <div class="col-4">
+                                    <label class="form-label">State</label>
+                                    <input class="form-control" name="State" id="State" placeholder="Your city" readonly>
+                                </div>
+                                <div class="col-4">
+                                    <label class="form-label">Country</label>
+                                    <input class="form-control" name="Country" id="Country" placeholder="Your state" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-correction">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="form-label">Zipcode</label>
+                                    <input class="form-control" name="zipcode" id="zipcode" placeholder="Your country" readonly>
+                                </div>
+                                <div class="col-4">
+                                    <label class="form-label">License</label>
+                                    <input class="form-control" name="license" id="license" placeholder="Enter Your License" readonly>
+                                </div>
+                                <div class="col-4">
+                                    <label class="form-label">NPI</label>
+                                    <input class="form-control" name="npi" id="npi" placeholder="Enter Your NPI" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-correction">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="form-label">Status</label>
+                                    <input class="form-control" name="Status" id="Status" placeholder="Your zipcode" readonly>
+                                </div>
+                            </div>
+                        <div>
+
+                        <div class="text-center text-lg-start mt-1 pt-2">
+                            <div class="col correction"> <br>
+                                <center>
+                                    <button id="edit_btn" class="btn btn-primary btn-lg;" style="width:150px; font-size:center; ;" onclick="location.href='/profile_edit'">Edit Profile
+                        </button>
+                                </center>
+                                </br>
+                            </div>
+                        </div>
+
+                        <div class="col-12 mb-5">
+                            <center>
+                                <div id="doctor_map" class="doctor-map">Please wait...</div>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+
+    <style>
+        .doctor-map {
+            background-size: cover;
+            height: 500px;
+            border-radius: 10px;
+            border: 10px solid rgb(218, 218, 218);
+            background-position: center;
+            width: 640px;
+        }
+        
+        .i {
+            text-align: center;
+            border-radius: 50px;
+            border: 1px solid #0c1c8e;
+            background-color: #0c1c8e;
+            color: #fff;
+            display: inline-block;
+            margin-top: 5px;
+            padding: 5px 15px;
+            font-weight: bold;
+        }
+        
+        .i:hover {
+            color: #0c1c8e;
+            background-color: #fff;
+            border: 1px solid #0c1c8e;
+            border-radius: 50px;
+            cursor: pointer;
+        }
+        
+        .doctor-name {
+            color: #0c1c8e;
+            font-weight: 700;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        
+        .gm-style-iw-d {
+            text-align: left;
+        }
+    </style>
+
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUCzgqm0XAkC68zLwI2hwoLwpwJEw6_Dc"></script>
+    <script>
+        $(document).ready(function() {
+
+            $('#processing').show();
+            $.ajax({
+                type: 'GET',
+                enctype: 'multipart/form-data',
+                url: './fetch',
+                processData: false,
+                contentType: false,
+                cache: false,
+                timeout: 800000,
+                success: function(data) {
+                    var obj = JSON.parse(data);
+
+                    $("#firstname").val(obj[2]);
+                    $("#lastname").val(obj[3]);
+                    $("#Contact").val(obj[5]);
+                    $("#Email").val(obj[6]);
+                    $("#Street").val(obj[7]);
+                    $("#City").val(obj[9]);
+                    $("#State").val(obj[10]);
+                    $("#Country").val(obj[11]);
+                    $("#zipcode").val(obj[12]);
+                    $("#Designation").val(obj[13]);
+                    $("#Status").val(obj[18]);
+                    $("#license").val(obj[16]);
+                    $("#npi").val(obj[17]);
+
+                    if ((obj[18]) == "Rejected") {
+                        $('#edit_btn').hide();
+                        $("#Status").css("background-color", "#ffcece");
+                    }
+
+                    if ((obj[18]) == "Pending") {
+                    
+                        $("#Status").css("background-color", "#f3e9c5");
+                    }
+
+                    var contact = obj[5];
+                    var designation = obj[13];
+                    var lat_val = Number(obj[14]);
+                    var lng_val = Number(obj[15]);
+                    var doctor = obj[2] + " " + obj[3];
+                    var dest_location = lat_val + "," + lng_val
+
+                    var address = obj[7] + ',' + obj[9] + ',' + obj[10] + ',' + obj[11] + ',' + obj[12];
+
+                    const labels = "A";
+                    var myloc = {
+                        lat: lat_val,
+                        lng: lng_val
+                    }
+                    var labelIndex = 0;
+                    var Info_obj = [];
+                    var mapOptions = {
+                        zoom: 12,
+                        center: myloc,
+                    };
+
+                    var map = new google.maps.Map(document.getElementById("doctor_map"), mapOptions);
+
+                    var doctor_details_map_window =
+                        '<div class="doctor-name">' + doctor + '</div>' +
+                        '<div style="font-size: 11px; color: #555;">' + designation + '</div>' +
+                        '<hr style="margin: 8px 0;">' +
+                        '<div style="margin-bottom: 3px;"><svg class="svg-inline--fa fa-location-dot" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="location-dot" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M168.3 499.2C116.1 435 0 279.4 0 192C0 85.96 85.96 0 192 0C298 0 384 85.96 384 192C384 279.4 267 435 215.7 499.2C203.4 514.5 180.6 514.5 168.3 499.2H168.3zM192 256C227.3 256 256 227.3 256 192C256 156.7 227.3 128 192 128C156.7 128 128 156.7 128 192C128 227.3 156.7 256 192 256z"></path></svg>' +
+                        '&nbsp;' + address + '</div>' +
+                        '<div style="margin-bottom: 3px;"><a href="tel:' + contact + '" style="text-decoration: none;color:black"><svg class="svg-inline--fa fa-phone" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="phone" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M511.2 387l-23.25 100.8c-3.266 14.25-15.79 24.22-30.46 24.22C205.2 512 0 306.8 0 54.5c0-14.66 9.969-27.2 24.22-30.45l100.8-23.25C139.7-2.602 154.7 5.018 160.8 18.92l46.52 108.5c5.438 12.78 1.77 27.67-8.98 36.45L144.5 207.1c33.98 69.22 90.26 125.5 159.5 159.5l44.08-53.8c8.688-10.78 23.69-14.51 36.47-8.975l108.5 46.51C506.1 357.2 514.6 372.4 511.2 387z"></path></svg>' +
+                        '&nbsp;' + contact + '</a></div>' +
+                        '<div style="text-align: rdight;">' +
+                        '<a target="_blank" href="http://maps.apple.com/maps?saddr=Current%20Location&daddr=' + dest_location + '" ><span class="i" style="cursor: pointer;"><svg class="svg-inline--fa fa-car" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="car" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M39.61 196.8L74.8 96.29C88.27 57.78 124.6 32 165.4 32H346.6C387.4 32 423.7 57.78 437.2 96.29L472.4 196.8C495.6 206.4 512 229.3 512 256V448C512 465.7 497.7 480 480 480H448C430.3 480 416 465.7 416 448V400H96V448C96 465.7 81.67 480 64 480H32C14.33 480 0 465.7 0 448V256C0 229.3 16.36 206.4 39.61 196.8V196.8zM109.1 192H402.9L376.8 117.4C372.3 104.6 360.2 96 346.6 96H165.4C151.8 96 139.7 104.6 135.2 117.4L109.1 192zM96 256C78.33 256 64 270.3 64 288C64 305.7 78.33 320 96 320C113.7 320 128 305.7 128 288C128 270.3 113.7 256 96 256zM416 320C433.7 320 448 305.7 448 288C448 270.3 433.7 256 416 256C398.3 256 384 270.3 384 288C384 305.7 398.3 320 416 320z"></path></svg> &nbsp; Get Directions</span></a>' +
+                        '</div>'
+
+                    const marker = new google.maps.Marker({
+                        position: {
+                            lat: lat_val,
+                            lng: lng_val
+                        },
+                        title: doctor,
+                        map: map,
+                        label: {
+                            text: labels,
+                            color: 'white'
+                        },
+                        index: 0,
+                        lat: lat_val,
+                        lng: lng_val
+                    });
+
+                    const detailWindow_1 = new google.maps.InfoWindow({
+                        content: doctor_details_map_window
+                    });
+
+                    marker.addListener("click", function() {
+                        detailWindow_1.open(map, marker);
+                        Info_obj[0] = detailWindow_1;
+                    });
+
+                    detailWindow_1.open(map, marker);
+                    Info_obj[0] = detailWindow_1;
+
+                    $('#processing').hide();
+                },
+                error: function(err) {
+                    $(this).html("error!");
+                    $('#processing').hide();
+                }
+            });
+
+        });
+    </script>
+
+</html>
+{% endblock %}
