@@ -1,5 +1,5 @@
 flask
-mysql-connector-python==8.0.29
+mysql-connector-python
 pandas
 requests
-Werkzeug==2.2.2
+Werkzeug

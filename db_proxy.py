@@ -3,7 +3,7 @@ import mail
 import EnDe
 import requests
 import pandas as pd
-import mysql.connector
+#import mysql.connector
 
 from flask import request, session
 #from werkzeug.utils import secure_filename
@@ -98,7 +98,7 @@ def check_user(email,password):
     # else:
     #     usertype = 'User'
     #     name = user['Firstname'].to_list()[0] + " " + user['Lastname'].to_list()[0]
-    return True, '', ''
+    return True, 'admin', 'Admin'
 
 
 def get_register_table():
@@ -569,3 +569,5 @@ def reject_mail(firstname, lastname, email):
 
 
                
+
+
