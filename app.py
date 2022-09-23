@@ -5,7 +5,7 @@ from flask import Flask, render_template, request, session
 
 
 app = Flask(__name__)
-app.secret_key = 'POC1'
+#app.secret_key = 'POC1'
 
 login_users = []
 Register_users=[]
