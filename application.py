@@ -1,9 +1,10 @@
+import db_proxy
 import json
 from flask import Flask, render_template, request, session
 
 
 application = Flask(__name__)
-#application.secret_key = 'POC1'
+application.secret_key = 'POC1'
 
 login_users = []
 Register_users=[]
