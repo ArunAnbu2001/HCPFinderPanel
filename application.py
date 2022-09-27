@@ -4,8 +4,8 @@ from flask import Flask, render_template, request, session
 from flask_cors import CORS
 
 application = Flask(__name__)
+application.secret_key = 'POC1'
 CORS(application)
-#application.secret_key = 'POC1'
 
 login_users = []
 Register_users=[]
