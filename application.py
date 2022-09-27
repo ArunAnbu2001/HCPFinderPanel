@@ -1,9 +1,10 @@
 import db_proxy
 import json
 from flask import Flask, render_template, request, session
-
+from flask_cors import CORS
 
 application = Flask(__name__)
+CORS(application)
 #application.secret_key = 'POC1'
 
 login_users = []
