@@ -70,38 +70,34 @@ def register():
    
     
 def check_user(email,password):
-    # conn = mysql.connector.connect(
-    #     host="hcpfinder.ckquopjoteib.us-east-2.rds.amazonaws.com", 
-    #     user="masoriadmin", 
-    #     port='3306', 
-    #     password='Masori123$',
-    #     database="hcpfinder")   
+    conn = mysql.connector.connect(
+        host="hcpfinder.ckquopjoteib.us-east-2.rds.amazonaws.com", 
+        user="masoriadmin", 
+        port='3306', 
+        password='Masori123$',
+        database="hcpfinder")   
 
-    # password = EnDe.encode(password).decode()
-    # usertype = ''
+    password = EnDe.encode(password).decode()
+    usertype = ''
 
-    # user = pd.read_sql_query("Select * from register_data Where Email='" +
-    #                     email+"' and Password='"+password+"'", conn)
-    # if user.empty:
-    #     admin = pd.read_sql_query("Select * from Admins Where username='" +
-    #                     email+"' and password='"+password+"'", conn)
+    user = pd.read_sql_query("Select * from register_data Where Email='" +
+                        email+"' and Password='"+password+"'", conn)
+    if user.empty:
+        admin = pd.read_sql_query("Select * from Admins Where username='" +
+                        email+"' and password='"+password+"'", conn)
 
-    #     if admin.empty:
-    #         name = usertype
-    #         return False, usertype, name
+        if admin.empty:
+            name = usertype
+            return False, usertype, name
 
-    #     else:
-    #         usertype = 'Admin'
-    #         name = usertype
-    #         return True, usertype, name
+        else:
+            usertype = 'Admin'
+            name = usertype
+            return True, usertype, name
 
-    # else:
-    #     usertype = 'User'
-    #     name = user['Firstname'].to_list()[0] + " " + user['Lastname'].to_list()[0]
-    if email.lower()=="admin@masoritherapeutics.com" and password=="Masori123$":
-        return True, 'Admin', 'Admin'
     else:
-        return True, 'User', email
+        usertype = 'User'
+        name = user['Firstname'].to_list()[0] + " " + user['Lastname'].to_list()[0]
 
 
 def get_register_table():
