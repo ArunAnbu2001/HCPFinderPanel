@@ -33,24 +33,6 @@ def login():
 def register_click():
     return render_template('register1.html')
 
-@app.route('/logon', methods=['POST'])
-def logon():
-    res = False
-    if request.method == 'POST':
-        email = request.form['email']
-        password = request.form['password']
-
-        res, usertype, username = db_proxy.check_user(email, password)
-        print(usertype)
-        session['UserType'] = usertype
-        session['UserName'] = username
-
-        if res == True:
-            login_users.append(email)
-            session["email"] = email
-
-    return json.dumps(res)
-
 
 @app.route("/get_register_table" ,methods=["GET","POST"])
 def get_register_table():
