@@ -6,9 +6,9 @@ from email.mime.text import MIMEText
 from email import encoders
 
 
-user = 'support@cleverbrain.in'
-password = 'Brainy123$'
-smtp = 'cleverbrain.in'
+user = 'siva.s@masoritherapeutics.com'
+password = 'Sivanspeed123$'
+smtp = 'smtpout.asia.secureserver.net'
 port = 587
 
 def SendMail(to_address, subject, body, attachments):
