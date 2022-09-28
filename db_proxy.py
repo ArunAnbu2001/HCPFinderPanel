@@ -98,7 +98,8 @@ def check_user(email,password):
     else:
         usertype = 'User'
         name = user['Firstname'].to_list()[0] + " " + user['Lastname'].to_list()[0]
-    
+        return True, usertype, name
+
 
 def get_register_table():
     conn = mysql.connector.connect(
@@ -197,7 +198,7 @@ def bulk_upload():
                     status = email
                     break
 
-    return status
+        return status
 
 
 def reject_doctor():
@@ -325,7 +326,7 @@ def change_password():
             cur.execute(updatequery)
             conn.commit()
             cur.close()
-        return True
+            return True
 
 
 def update_data():
@@ -480,7 +481,42 @@ def fetch():
             conn.commit()
             cursor.close()
             return new_list
-            
+def fetch_opt(Npinumber):
+        conn = mysql.connector.connect(
+            host="hcpfinder.ckquopjoteib.us-east-2.rds.amazonaws.com", 
+            user="masoriadmin", 
+            port='3306', 
+            password='Masori123$',
+            database="hcpfinder")
+        cursor=conn.cursor()
+        user_check="Select * from register_data Where NPI='"+Npinumber+"'"
+        cursor.execute(user_check)
+        row=cursor.fetchall()
+        if len(row) > 0:
+            new_list=[]
+            for value in row:
+                for val in value:
+                    new_list.append(val)
+    
+            conn.commit()
+            cursor.close()
+            return new_list
+def update_opt():
+    if request.method=="POST":
+        conn = mysql.connector.connect(
+            host="hcpfinder.ckquopjoteib.us-east-2.rds.amazonaws.com", 
+            user="masoriadmin", 
+            port='3306', 
+            password='Masori123$',
+            database="hcpfinder")
+
+        Npinumber=request.form['Npi']
+        
+        cur=conn.cursor()
+        cur.execute("Update register_data SET Status='Opt-Out' WHERE NPI='" + Npinumber +"'")
+        conn.commit()
+        cur.close()
+           
 def register_mail(firstname, lastname, email):
     body = """
     <html>
