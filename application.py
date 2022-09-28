@@ -1,11 +1,11 @@
+
 import db_proxy
 import json
 from flask import Flask, render_template, request, session
-from flask_cors import CORS
+
 
 application = Flask(__name__)
 application.secret_key = 'POC1'
-CORS(application)
 
 login_users = []
 Register_users=[]
@@ -51,6 +51,7 @@ def logon():
             session["email"] = email
 
     return json.dumps(res)
+
 
 @application.route("/get_register_table" ,methods=["GET","POST"])
 def get_register_table():
@@ -110,6 +111,22 @@ def update_profile():
 @application.route('/fetch', methods=['GET'])
 def fetch():
     res = db_proxy.fetch()
+    return json.dumps(res)
+
+@application.route('/optout')
+def optout():  
+   return render_template('optout.html')
+   
+@application.route('/fetch_opt', methods=['POST'])
+def fetch_opt():
+    if request.method == 'POST':
+        Npinumber=request.form['Npi']
+        res = db_proxy.fetch_opt(Npinumber)
+        return json.dumps(res)
+
+@application.route('/update_opt', methods=['POST'])
+def update_opt():
+    res = db_proxy.update_opt()
     return json.dumps(res)
 
 @application.route('/logout', methods=['GET', 'POST'])
