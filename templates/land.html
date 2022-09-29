@@ -28,30 +28,37 @@
 
 {% endif %} {% if session['UserType']=="Admin" %}
 <style>
-/* table {
+    /* table {
   border-collapse: collapse;
   border-spacing: 0;
 } */
-table,thead {
-    width: 100% !important;
     
-}table.tr {
-    display: flex;
-    align-items: stretch;
-} 
-#Designation,#Country{
-    -webkit-appearance: listbox !important
-}
-        
-td:nth-child(9),th:nth-child(9) {
-    visibility: collapse;
-    display: none;
-}
-td:nth-child(10),th:nth-child(10) {
-    visibility: collapse;
-    display: none;
-}
-
+    table,
+    thead {
+        width: 100% !important;
+    }
+    
+    table.tr {
+        display: flex;
+        align-items: stretch;
+    }
+    
+    #Designation,
+    #Country {
+        -webkit-appearance: listbox !important
+    }
+    
+    td:nth-child(9),
+    th:nth-child(9) {
+        visibility: collapse;
+        display: none;
+    }
+    
+    td:nth-child(10),
+    th:nth-child(10) {
+        visibility: collapse;
+        display: none;
+    }
 </style>
 <div class="app-content content " style="padding: calc(2rem + 4rem + 1rem) 2rem 0;">
     <div class="header-navbar-shadow" style="top:28px;height:60px;"></div>
@@ -65,7 +72,7 @@ td:nth-child(10),th:nth-child(10) {
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <table id="datatable"   class="datatables-basic table table-striped table-bordered">
+                        <table id="datatable" class="datatables-basic table table-striped table-bordered">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -83,7 +90,7 @@ td:nth-child(10),th:nth-child(10) {
                                 </tr>
                             </thead>
                         </table>
-                        
+
                     </div>
                 </div>
             </div>
@@ -124,7 +131,7 @@ td:nth-child(10),th:nth-child(10) {
                 </div>
                 <div class="mb-1">
                     <label class="form-label">Contact Number<span style="color:red">*</span></label>
-                    <input type="number" class="form-control" name="Contact" id="Contact" placeholder="Enter your contact number">
+                    <input class="form-control" name="Contact" id="Contact" placeholder="Enter your contact number">
                 </div>
                 <div class="mb-1">
                     <label class="form-label">Designation</label>
@@ -413,7 +420,7 @@ td:nth-child(10),th:nth-child(10) {
                 <button type="button" id="save_button" class="btn btn-primary data-submit me-1" onclick="register_data()">Save</button>
                 <button type="button" id="update_button" style="display: none;" class="btn btn-primary data-submit me-1" onclick="update()">Update</button>
                 <button type="reset" id="cancel_button1" class="btn btn-outline-secondary" data-bs-dismiss="modal" onclick="cancel()">Cancel</button>
-            </br>
+                </br>
             </div>
         </form>
     </div>
@@ -488,7 +495,7 @@ td:nth-child(10),th:nth-child(10) {
                 </div>
                 <div class="mb-1">
                     <label class="form-label">Contact Number</label>
-                    <input type="number" class="form-control" name="Contact" id="Contact_view" placeholder="Enter your contact number" readonly>
+                    <input class="form-control" name="Contact" id="Contact_view" placeholder="Enter your contact number" readonly>
                 </div>
                 <div class="mb-1">
                     <label class="form-label">Designation</label>
@@ -736,7 +743,7 @@ td:nth-child(10),th:nth-child(10) {
         var status = currentRow.find("td:eq(7)").text();
         var license = currentRow.find("td:eq(8)").text();
         var NPI = currentRow.find("td:eq(9)").text();
-       
+
 
         $("#firstname").data('id', id);
         $("#firstname").data('status', status);
@@ -745,17 +752,17 @@ td:nth-child(10),th:nth-child(10) {
         $("#lastname").val(lastname);
         $("#Email").val(email);
         $("#Contact").val(contactnum);
-        $("#Designation").append('<option value="'+designation +'">' + designation + '</option>');
-        document.getElementById("Designation").value=designation;
+        $("#Designation").append('<option value="' + designation + '">' + designation + '</option>');
+        document.getElementById("Designation").value = designation;
         $("#Street").val(address[0]);
         $("#City").val(address[1]);
         $("#State").val(address[2]);
-        $("#Country").append('<option value="'+address[3] +'">' + address[3] + '</option>');
-        document.getElementById("Country").value=address[3]; 
+        $("#Country").append('<option value="' + address[3] + '">' + address[3] + '</option>');
+        document.getElementById("Country").value = address[3];
         $("#zipcode").val(address[4]);
         $("#license").val(license);
         $("#npi").val(NPI);
-        
+
         $('#update_button').show();
         $('#save_button').hide();
         $('#exampleModalLabel').text('Update Data');
@@ -805,7 +812,7 @@ td:nth-child(10),th:nth-child(10) {
         $("#status_view").val(status);
         $("#license_view").val(license);
         $("#npi_view").val(NPI);
-        
+
         if ((status == 'Rejected') && (reason != 'null')) {
             $(".reason-lbl").show();
             $("#reason_view").show();
@@ -819,7 +826,7 @@ td:nth-child(10),th:nth-child(10) {
         var validzip = /(^\d{5}$)|(^\d{5}-\d{4}$)/;
         var phonenumber = /^(\()?\d{3}(\))?(-|\s)?\d{3}(-|\s)\d{4}$/;
 
-        if ($('#firstname').val() == '' || $('#lastname').val() == '' || $('#Email').val() == '' || $('#Contact').val() == '' || $('#Street').val() == '' || $('#City').val() == '' || $('#State').val() == '' || $('#Country').val() == '' || $('#zipcode').val() == '' ) {
+        if ($('#firstname').val() == '' || $('#lastname').val() == '' || $('#Email').val() == '' || $('#Contact').val() == '' || $('#Street').val() == '' || $('#City').val() == '' || $('#State').val() == '' || $('#Country').val() == '' || $('#zipcode').val() == '') {
             Swal.fire({
                 title: "All fields are required.",
                 icon: "warning",
@@ -1137,12 +1144,11 @@ td:nth-child(10),th:nth-child(10) {
                         data: "License"
                     }, {
                         data: "NPI"
-                    },{
+                    }, {
                         data: ""
-                    },{
-                        data:""
-                    }
-                        ],
+                    }, {
+                        data: ""
+                    }],
                     columnDefs: [{
                         responsivePriority: 1,
                     }, {
@@ -1232,7 +1238,7 @@ td:nth-child(10),th:nth-child(10) {
             }
         });
     }
-    
+
     $(document).ready(function() {
         load_data();
         $('[data-toggle="tooltip"]').tooltip();
