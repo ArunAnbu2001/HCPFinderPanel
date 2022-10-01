@@ -50,91 +50,7 @@
         input::placeholder {
             font-size: 14px;
         }
-    </style>
-</head>
-
-<body>
-    <!--  -->
-    <section class="vh-100">
-        <div class="container-fluid h-custom">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-md-9 col-lg-6 col-xl-5">
-                    <img src="{{ url_for('static', filename= 'images/logo-green.png') }}" class="img-fluid" alt="Logo">
-                </div>
-                <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                    <div>
-                        <center>
-                            <h6>OPT-OUT</h6>
-                        </center><br>
-                    </div>
-                    <!--NPI input -->
-
-                    <div class="row">
-                        <div class="col">
-                            <label class="form-label">NPI number</label>
-                            <input class="form-control" name="npinumber" id="npinumber" placeholder="Enter NPI number">
-                        </div>
-                        <div class="col">
-                            <br><button id="view_btn" class="btn btn-primary btn-lg;" style="width:150px; font-size:center;" onclick="view()">View details</button>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col">
-                            <label class="form-label">First Name</label>
-                            <input class="form-control" name="firstname" id="firstname" placeholder="Your First Name" readonly>
-                        </div>
-
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <label class="form-label">Last Name</label>
-                            <input class="form-control" name="lastsname" id="lastname" placeholder="Your Last Name" readonly>
-                        </div>
-
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <label class="form-label">Contact Number</label>
-                            <input class="form-control" name="Contact" id="Contact" placeholder="Your contact number" readonly>
-                        </div>
-
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <label class="form-label">City</label>
-                            <input class="form-control" name="City" id="City" placeholder="Your area" readonly>
-                        </div>
-                    </div>
-
-                    <div class="form-group relative">
-                        <label class="inline-checkboxes tos">
-                            <br><input id="terms-check" type="checkbox" onclick="change_checkbox();">
-                             By checking this box, you acknowledge that you have agreed with the  
-                            <a href="{{ url_for('static', filename='MASORIHCPFinderRegistrationTermsConditions.pdf', _external=True) }}" target="_blank" style="text-decoration: none;">Terms and Conditions</a>.
-                            <br>  
-                        </label>
-                    </div>
-
-                    <div class="text-center text-lg-start mt-1 pt-2">
-                        <br>
-                        <p align="right"><button id="clr_btn" class="btn btn-primary btn-lg;" style="width:150px; font-size:center;background-color: aliceblue;color:green;" onclick="clear();">Clear</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <button id="opt_btn" class="btn btn-primary btn-lg;" style="width:150px; font-size:center;" onclick="Optout()">Opt-Out</button>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
-
-            <!-- Right -->
-            <div>
-                <br>
-            </div>
-            <!-- Right -->
-        </div>
-    </section>
-    <style>
+        
         #processing {
             display: none;
             top: 0;
@@ -152,8 +68,89 @@
             font-weight: 500;
         }
     </style>
+</head>
 
-    <div id="processing">Please Wait . . .</div>
+<body>
+    <!--  -->
+    <section class="vh-100">
+        <div class="container-fluid h-custom">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-md-9 col-lg-6 col-xl-5">
+                    <img src="{{ url_for('static', filename= 'images/logo-green.png') }}" class="img-fluid" alt="Logo">
+                </div>
+                <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                    <div>
+                        <h4>OPT-OUT</h4><br>
+                    </div>
+                    <!--NPI input -->
+
+                    <div class="row">
+                        <div class="col-9">
+                            <label class="form-label">NPI number</label>
+                            <input class="form-control" name="npinumber" id="npinumber" placeholder="Enter NPI number">
+                        </div>
+                        <div class="col-3">
+                            <br><button id="view_btn" class="btn btn-primary btn-lg;" style="width: 90px;margin-left: -10px;" onclick="verify()">Verify</button>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col">
+                            <label class="form-label">First Name</label>
+                            <input class="form-control" name="firstname" id="firstname" placeholder="Enter your First Name">
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label class="form-label">Last Name</label>
+                            <input class="form-control" name="lastsname" id="lastname" placeholder="Enter your Last Name">
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label class="form-label">Contact Number</label>
+                            <input class="form-control" type="text" name="Contact" id="Contact" placeholder="Enter your Contact Number">
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label class="form-label">City</label>
+                            <input class="form-control" name="City" id="City" placeholder="Enter your City">
+                        </div>
+                    </div>
+
+                    <div class="form-group relative">
+                        <label class="inline-checkboxes tos">
+                            <br><input id="terms-check" type="checkbox">
+                            By checking this box, you acknowledge and agree that your practice 
+                            details will no longer appear within the Healthcare Provider Finder 
+                            search results. Please allow up to 72 hours for processing. 
+                            <a href="{{ url_for('static', filename='MASORIHCPFinderRegistrationTermsConditions.pdf', _external=True) }}" target="_blank" style="text-decoration: none;">Terms and Conditions</a>.
+                            <br>  
+                        </label>
+                    </div>
+
+                    <div class="text-center text-lg-start mt-1 pt-2">
+                        <br>
+                        <p align="right"><button id="clr_btn" class="btn btn-primary btn-lg;" style="width:150px; font-size:center;background-color: aliceblue;color:green;" onclick="clear();">Clear</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button id="opt_btn" class="btn btn-primary btn-lg;" style="width:150px; font-size:center;" onclick="Optout()">Opt-Out</button>
+                        </p>
+                    </div>
+                    <div id="processing">Please Wait . . . This may take a while.</div>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
+            <!-- Right -->
+            <div style="color: white;font-size: 14px;">Copyright ©️ 2020-2022 MASORI Therapeutics Corporation.
+                <br>
+            </div>
+            <!-- Right -->
+        </div>
+    </section>
     <!--  -->
     <script src="{{ url_for('static', filename= 'plugins/jquery-3.6.0/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ url_for('static', filename= 'plugins/bootstrap-5.0.2/bootstrap.min.js') }}"></script>
@@ -163,7 +160,7 @@
 </body>
 
 <script>
-    function view() {
+    function verify() {
         var data = new FormData();
         var pattern = /^[0-9]{10}$/;
 
@@ -176,7 +173,7 @@
                 timeOut: 5e3
             });
         } else if (!pattern.test($('#npinumber').val())) {
-            toastr.error("Wrong Number, Allow 10 digits only.", "Attempt Failed!", {
+            toastr.error("Please enter only numeric values.", "NPI Verification Attempt Failed!", {
                 showMethod: "slideDown",
                 hideMethod: "slideUp",
                 timeOut: 5e3
@@ -193,14 +190,16 @@
                 timeout: 800000,
                 data: data,
                 success: function(data) {
-                    var obj = JSON.parse(data);
-                    $("#firstname").val(obj[2]);
-                    $("#lastname").val(obj[3]);
-                    $("#Contact").val(obj[5].replace(/(\r\n|\n|\r)/gm, ""));
-                    $("#City").val(obj[9]);
-
-
                     $('#processing').hide();
+                    var obj = JSON.parse(data);
+
+                    if (obj == false) {
+                        toastr.error("Invalid NPI Number.", "NPI Verification Attempt Failed!", {
+                            showMethod: "slideDown",
+                            hideMethod: "slideUp",
+                            timeOut: 5e3
+                        });
+                    }
                 },
                 error: function(err) {
                     $(this).html("error!");
@@ -213,15 +212,27 @@
     function Optout() {
         var data = new FormData();
         data.append('Npi', $("#npinumber").val());
+        data.append('firstname', $("#firstname").val());
+        data.append('lastname', $("#lastname").val());
+        data.append('Contact', $("#Contact").val());
+        data.append('City', $("#City").val());
+        var pattern = /^[0-9]{10}$/;
 
-        if ($('#npinumber').val() == '') {
-            toastr.error("Please fill the Npinumber.", "Attempt Failed!", {
+        if ($('#npinumber').val() == '' || $("#firstname").val() == '' || $("#lastname").val() == '' ||
+            $("#Contact").val() == '' || $("#City").val() == '') {
+            toastr.error("All fields are Required.", "Attempt Failed!", {
                 showMethod: "slideDown",
                 hideMethod: "slideUp",
                 timeOut: 5e3
             });
         } else if (!document.getElementById("terms-check").checked) {
             toastr.error("Please check Terms & Conditions.", "Attempt Failed!", {
+                showMethod: "slideDown",
+                hideMethod: "slideUp",
+                timeOut: 5e3
+            });
+        } else if (!pattern.test($('#npinumber').val())) {
+            toastr.error("Please verify the NPI Number.", "Attempt Failed!", {
                 showMethod: "slideDown",
                 hideMethod: "slideUp",
                 timeOut: 5e3
@@ -238,13 +249,49 @@
                 timeout: 800000,
                 data: data,
                 success: function(data) {
-                    toastr.success("You have successfully updated.", "Updated!", {
-                        showMethod: "slideDown",
-                        hideMethod: "slideUp",
-                        timeOut: 2e3
-                    });
-                    inputs.forEach(input => input.value = '');
-                    $('input[type="checkbox"]:checked').prop('checked', false);
+                    var obj = JSON.parse(data);
+                    console.log(obj);
+
+                    if (obj == 'Firstname') {
+                        toastr.error("Please Check your First Name.", "Attempt Failed!", {
+                            showMethod: "slideDown",
+                            hideMethod: "slideUp",
+                            timeOut: 5e3
+                        });
+                    }
+
+                    if (obj == 'Lastname') {
+                        toastr.error("Please Check your Last Name.", "Attempt Failed!", {
+                            showMethod: "slideDown",
+                            hideMethod: "slideUp",
+                            timeOut: 5e3
+                        });
+                    }
+
+                    if (obj == 'ContactNumber') {
+                        toastr.error("Please Check your Contact Number.", "Attempt Failed!", {
+                            showMethod: "slideDown",
+                            hideMethod: "slideUp",
+                            timeOut: 5e3
+                        });
+                    }
+
+                    if (obj == 'City') {
+                        toastr.error("Please Check your City.", "Attempt Failed!", {
+                            showMethod: "slideDown",
+                            hideMethod: "slideUp",
+                            timeOut: 5e3
+                        });
+                    }
+
+                    if (obj == true) {
+                        toastr.success("You have successfully updated.", "Updated!", {
+                            showMethod: "slideDown",
+                            hideMethod: "slideUp",
+                            timeOut: 2e3
+                        });
+                    }
+
                     $('#processing').hide();
                 },
                 error: function(err) {
@@ -255,12 +302,22 @@
         }
     }
 
+    function clear() {
+        $("#npinumber").val('');
+        $("#firstname").val('');
+        $("#lastname").val('');
+        $("#Contact").val('');
+        $("#City").val('');
+    }
+
     let btnClear = document.getElementById('clr_btn');
     let inputs = document.querySelectorAll('input');
 
     btnClear.addEventListener('click', () => {
+        $("#processing").show();
         inputs.forEach(input => input.value = '');
         $('input[type="checkbox"]:checked').prop('checked', false);
+        $("#processing").hide();
 
     });
 </script>
