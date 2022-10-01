@@ -481,6 +481,7 @@ def fetch():
             conn.commit()
             cursor.close()
             return new_list
+
 def fetch_opt(Npinumber):
         conn = mysql.connector.connect(
             host="hcpfinder.ckquopjoteib.us-east-2.rds.amazonaws.com", 
@@ -488,19 +489,13 @@ def fetch_opt(Npinumber):
             port='3306', 
             password='Masori123$',
             database="hcpfinder")
-        cursor=conn.cursor()
-        user_check="Select * from register_data Where NPI='"+Npinumber+"'"
-        cursor.execute(user_check)
-        row=cursor.fetchall()
-        if len(row) > 0:
-            new_list=[]
-            for value in row:
-                for val in value:
-                    new_list.append(val)
-    
-            conn.commit()
-            cursor.close()
-            return new_list
+        
+        check_npi = pd.read_sql_query("Select NPI from register_data Where NPI='"+Npinumber+"'", conn)
+        if check_npi.empty:
+            return False
+        else:
+            return True
+
 def update_opt():
     if request.method=="POST":
         conn = mysql.connector.connect(
@@ -511,12 +506,33 @@ def update_opt():
             database="hcpfinder")
 
         Npinumber=request.form['Npi']
+        firstname=request.form['firstname']
+        lastname=request.form['lastname']
+        Contact=request.form['Contact']
+        contact_num = ''.join(i for i in Contact if i.isdigit())
+        City=request.form['City']
         
-        cur=conn.cursor()
-        cur.execute("Update register_data SET Status='Opt-Out' WHERE NPI='" + Npinumber +"'")
-        conn.commit()
-        cur.close()
-           
+        check_npi = pd.read_sql_query("Select Firstname, Lastname, ContactNumber, City, NPI from register_data Where NPI='"+Npinumber+"'", conn)
+        if check_npi.empty:
+            return False
+        else:
+            for idx, row in check_npi.iterrows():
+                if row['Firstname'].lower() != firstname.lower().strip():
+                    return 'Firstname'
+                elif row['Lastname'].lower() != lastname.lower().strip():
+                    return 'Lastname'
+                elif len(row['ContactNumber']) > 5 and ''.join(i for i in row['ContactNumber'] if i.isdigit()) != contact_num:
+                        return 'ContactNumber'
+                elif row['City'].lower() != City.lower():
+                    return 'City'
+                else:
+                    cur=conn.cursor()
+                    cur.execute("Update register_data SET Status='Opt-Out' WHERE NPI='" + Npinumber +"'")
+                    conn.commit()
+                    cur.close()
+                    return True
+
+
 def register_mail(firstname, lastname, email):
     body = """
     <html>
@@ -593,3 +609,4 @@ def reject_mail(firstname, lastname, email):
     """
     mail.SendMail(email, "Your staus have been changed - HCP Finder", body, [])
     return       
+
