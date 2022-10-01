@@ -391,7 +391,7 @@
                         <label class="inline-checkboxes tos">
                             <input id="terms-check" type="checkbox" onclick="change_checkbox();">
                              By checking this box, you acknowledge that you have agreed with the  
-                            <a href="http://nuplazid-masori.azurewebsites.net/pdf/MASORI%20HCP%20Finder%20Registration%20Terms%20and%20Conditions.pdf" target="_blank" style="text-decoration: none;">Terms and Conditions</a>.
+                            <a href="{{ url_for('static', filename='MASORIHCPFinderRegistrationTermsConditions.pdf', _external=True) }}" target="_blank" style="text-decoration: none;">Terms and Conditions</a>.
                             <br>  
                             <span></span>
                         </label>
