@@ -41,8 +41,6 @@ def register():
 
         if check_email.empty:
 
-            register_mail(firstname, lastname, email)
-
             address = str(street)+","+str(city)+","+str(state) + \
             ", United States,"+str(zipcode)
 
@@ -63,6 +61,8 @@ def register():
             conn.commit()
             cur.close()
 
+            register_mail(firstname, lastname, email)
+            
             return True
 
         else:

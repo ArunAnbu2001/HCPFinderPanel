@@ -6,10 +6,10 @@ from email.mime.text import MIMEText
 from email import encoders
 
 
-user = 'siva.s@masoritherapeutics.com'
-password = 'Sivanspeed123$'
-smtp = 'smtpout.asia.secureserver.net'
-port = 587
+user = 'acadiahcpfinder@masori.com'
+password = "ZN'YP!%Uaawyd&rC"
+smtp = 'smtpout.secureserver.net'
+port = 465
 
 def SendMail(to_address, subject, body, attachments):
     sent_from = user
@@ -51,7 +51,7 @@ def SendMail(to_address, subject, body, attachments):
         smtp_server.starttls(context=context)
         smtp_server.ehlo()
         smtp_server.login(user, password)
-        # smtp_server.sendmail(sent_from, to_address, message.as_string())
+        smtp_server.sendmail(sent_from, to_address, message.as_string())
         smtp_server.close()
         print ("Email sent successfully!")
     except Exception as ex:
@@ -99,48 +99,9 @@ def SendMailExcel(to_address, subject, body, attachments):
         smtp_server.starttls(context=context)
         smtp_server.ehlo()
         smtp_server.login(user, password)
-        # smtp_server.sendmail(sent_from, to_address, message.as_string())
+        smtp_server.sendmail(sent_from, to_address, message.as_string())
         smtp_server.close()
         print ("Email sent successfully!")
     except Exception as ex:
         print ("Something went wrong….",ex)
 
-
-# import smtplib
-
-
-# context = ssl.create_default_context()
-# smtp_server = smtplib.SMTP('smtpout.secureserver.net', 465)
-# smtp_server.starttls(context=context)
-# smtp_server.ehlo()
-
-# message = MIMEMultipart()
-# message['From'] = 'siva.s@masoritherapeutics.com'
-# message['To'] = 'sivaneshmsc@gmail.com'
-# message['Subject'] = 'Test mail from masori'
-
-# message.attach(MIMEText('here is the email', 'html'))
-
-# smtp_server.login('siva.s@masoritherapeutics.com', 'Sivanspeed123$')
-# smtp_server.sendmail('siva.s@masoritherapeutics.com', 'sivaneshmsc@gmail.com', message.as_string())
-# smtp_server.close()
-# smtp_server.quit()
-
-# from email.MIMEMultipart import MIMEMultipart
-# from email.MIMEText import MIMEText
-
-# msg = MIMEMultipart()
-# msg.set_unixfrom('author')
-# msg['From'] = 'you@mail.com'
-# msg['To'] = 'them@mail.com'
-# msg['Subject'] = 'simple email in python'
-# message = 'here is the email'
-# msg.attach(MIMEText(message))
-
-# mailserver = smtplib.SMTP_SSL('smtpout.secureserver.net', 465)
-# mailserver.ehlo()
-# mailserver.login('siva.s@masoritherapeutics.com', 'Sivanspeed123$')
-
-# mailserver.sendmail('siva.s@masoritherapeutics.com','sivaneshmsc@gmail.com',msg.as_string())
-
-# mailserver.quit()
