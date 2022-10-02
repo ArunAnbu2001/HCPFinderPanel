@@ -142,3 +142,24 @@ def logout():
     return status
 
 #application.run(debug=True, port=4848)
+
+
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
+msg = MIMEMultipart()
+msg.set_unixfrom('author')
+msg['From'] = 'acadiahcpfinder@masori.com'
+msg['To'] = 'siva.s@masoritherapeutics.com'
+msg['Subject'] = 'Its working !!!'
+message = 'This Email sending from HCP Finder Admin Panel in AWS Environment'
+msg.attach(MIMEText(message))
+
+mailserver = smtplib.SMTP_SSL('smtpout.secureserver.net', 465)
+mailserver.ehlo()
+mailserver.login('acadiahcpfinder@masori.com', "ZN'YP!%Uaawyd&rC")
+
+mailserver.sendmail('acadiahcpfinder@masori.com','siva.s@masoritherapeutics.com',msg.as_string())
+
+mailserver.quit()
