@@ -162,14 +162,14 @@
 </body>
 
 <script>
-    function verify() {
-        $(document).ready(function() {
-            $('#firstname').attr('disabled',true);
-            $('#lastname').attr('disabled',true);
-            $('#Contact').attr('disabled',true);
-            $('#City').attr('disabled',true);
-        });
-        
+    $(document).ready(function() {
+        $('#firstname').attr('disabled',true);
+        $('#lastname').attr('disabled',true);
+        $('#Contact').attr('disabled',true);
+        $('#City').attr('disabled',true);
+    });
+    
+    function verify() {        
         var data = new FormData();
         var pattern = /^[0-9]+$/;
 
