@@ -632,3 +632,4 @@ def optout_mail(firstname, lastname, contact, city, npi, email):
     """
     mail.SendMail(email, "You have been Requested to Opt-Out - HCP Finder", body, [])
     return
+
