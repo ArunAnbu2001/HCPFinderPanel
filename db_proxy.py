@@ -215,12 +215,12 @@ def reject_doctor():
         lastname=request.form['lastname']
         email=request.form['email']
 
-        reject_mail(firstname, lastname, email)
-
         cur=conn.cursor()
         cur.execute("Update register_data SET Status='Rejected' WHERE ID='" + id +"'")
         conn.commit()
         cur.close()
+        
+        reject_mail(firstname, lastname, email)
 
 
 def reject_reason_doctor():
@@ -255,12 +255,12 @@ def approve_doctor():
         lastname=request.form['lastname']
         email=request.form['email']
 
-        approve_mail(firstname, lastname, email)
-
         cur=conn.cursor()
         cur.execute("Update register_data SET Status='Approved' WHERE ID='" + id +"'")
         conn.commit()
         cur.close()
+        
+        approve_mail(firstname, lastname, email)
 
 
 def pending_doctor():
@@ -530,6 +530,9 @@ def update_opt():
                     cur.execute("Update register_data SET Status='Opt-Out' WHERE NPI='" + Npinumber +"'")
                     conn.commit()
                     cur.close()
+                    
+                    optout_mail(row['Firstname'],row['Lastname'],row['ContactNumber'],row['City'],row['NPI'],row['Email'])
+
                     return True
 
 
@@ -540,7 +543,35 @@ def register_mail(firstname, lastname, email):
             <p>
                 Dear """ + firstname + " " + lastname + """,
             </p>
+            <p
+def optout_mail(firstname, lastname, contact, city, npi, email):
+    body = """
+    <html>
+        <body>
             <p>
+                Dear Acadia Pharmaceuticals,
+            </p>
+            <p>
+            The following HCP has requested to opt-out from the Acadia HCP Locator 
+            and will be removed from the search results within 72 hours.
+            </p>
+            <p>
+                """ + npi + """ - Verified<br>
+                """ + firstname + """<br>
+                """ + lastname + """<br>
+                """ + contact + """<br>
+                """ + city + """<br>
+            </p>
+            <p>
+                Thank you in advance,<br>
+                <b>The MASORI Help Desk</b>
+            </p>
+        </body>
+    </html>
+    """
+    mail.SendMail(email, "You have been Requested to Opt-Out - HCP Finder", body, [])
+    return
+
                 You have been registered with HCP finder.
             </p>
             <br>
@@ -610,3 +641,31 @@ def reject_mail(firstname, lastname, email):
     mail.SendMail(email, "Your staus have been changed - HCP Finder", body, [])
     return       
 
+
+def optout_mail(firstname, lastname, contact, city, npi, email):
+    body = """
+    <html>
+        <body>
+            <p>
+                Dear Acadia Pharmaceuticals,
+            </p>
+            <p>
+            The following HCP has requested to opt-out from the Acadia HCP Locator 
+            and will be removed from the search results within 72 hours.
+            </p>
+            <p>
+                """ + npi + """ - Verified<br>
+                """ + firstname + """<br>
+                """ + lastname + """<br>
+                """ + contact + """<br>
+                """ + city + """<br>
+            </p>
+            <p>
+                Thank you in advance,<br>
+                <b>The MASORI Help Desk</b>
+            </p>
+        </body>
+    </html>
+    """
+    mail.SendMail(email, "You have been Requested to Opt-Out - HCP Finder", body, [])
+    return
