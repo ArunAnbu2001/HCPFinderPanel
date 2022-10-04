@@ -177,6 +177,12 @@ input[type=number] {
     height: 110vh !important;
 }
 
+.fixed-footer{
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
 @media screen and (max-width: 991px) {
     .body-section{
         height: 120vh !important;
