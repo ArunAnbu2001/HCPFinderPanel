@@ -1,107 +1,28 @@
-from email.mime.base import MIMEBase
-import smtplib, ssl
 
+import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from email import encoders
 
+from_addr = 'acadiahcpfinder@masori.com'
+pwd = "ZN'YP!%Uaawyd&rC"
 
-user = 'acadiahcpfinder@masori.com'
-password = "ZN'YP!%Uaawyd&rC"
-smtp = 'smtpout.secureserver.net'
-port = 465
-
-def SendMail(to_address, subject, body, attachments):
-    sent_from = user
-
-    email_text = """\
-    Subject: %s
-    %s
-    """ % (subject, body)
-
-    message = MIMEMultipart()
-    message['From'] = sent_from
-    message['Subject'] = subject
-    
-    message.attach(MIMEText(body, 'html'))
-
-    imgCnt = 1
-    for attachement in attachments:
-        # to add an attachment is just add a MIMEBase object to read a picture locally.
-        with open(attachement, 'rb') as f:
-            tempfilename = 'img' + str(imgCnt) + '.png'
-            # set attachment mime and file name, the image type is png
-            mime = MIMEBase('image', 'png', filename=tempfilename)
-            # add required header data:
-            mime.add_header('Content-Disposition', 'attachment', filename=tempfilename)
-            mime.add_header('X-Attachment-Id', '0')
-            mime.add_header('Content-ID', '<0>')
-            # read attachment file content into the MIMEBase object
-            mime.set_payload(f.read())
-            # encode with base64
-            encoders.encode_base64(mime)
-            # add MIMEBase object to MIMEMultipart object
-            message.attach(mime)
-
-            imgCnt = imgCnt + 1
+def SendMail (to_addr, subject, body, attachment):
 
     try:
-        context = ssl.create_default_context()
-        smtp_server = smtplib.SMTP(smtp, port)
-        smtp_server.starttls(context=context)
-        smtp_server.ehlo()
-        smtp_server.login(user, password)
-        smtp_server.sendmail(sent_from, to_address, message.as_string())
-        smtp_server.close()
+        msg = MIMEMultipart()
+        msg.set_unixfrom('author')
+        msg['From'] = from_addr
+        msg['To'] = to_addr
+        msg['Subject'] = subject
+        message = body
+        msg.attach(MIMEText(message, "html"))
+
+        mailserver = smtplib.SMTP_SSL('smtpout.secureserver.net', 465)
+        mailserver.ehlo()
+        mailserver.login(from_addr, pwd)
+        mailserver.sendmail(from_addr,to_addr,msg.as_string())
+        mailserver.quit()
         print ("Email sent successfully!")
+
     except Exception as ex:
-        print ("Something went wrong….",ex)
-
-
-def SendMailExcel(to_address, subject, body, attachments):
-    sent_from = user
-
-    email_text = """\
-    Subject: %s
-    %s
-    """ % (subject, body)
-    print(email_text)
-
-    message = MIMEMultipart()
-    message['From'] = sent_from
-    message['Subject'] = subject
-    
-    message.attach(MIMEText(body, 'html'))
-
-    imgCnt = 1
-    for attachement in attachments:
-        # to add an attachment is just add a MIMEBase object to read a picture locally.
-        with open(attachement, 'rb') as f:
-            tempfilename = 'Export To Excel' + str(imgCnt) + '.xlsx'
-            # set attachment mime and file name, the image type is png
-            mime = MIMEBase('application', 'octet-stream', filename=tempfilename)
-            # add required header data:
-            mime.add_header('Content-Disposition', 'attachment', filename=tempfilename)
-            mime.add_header('X-Attachment-Id', '0')
-            mime.add_header('Content-ID', '<0>')
-            # read attachment file content into the MIMEBase object
-            mime.set_payload(f.read())
-            # encode with base64
-            encoders.encode_base64(mime)
-            # add MIMEBase object to MIMEMultipart object
-            message.attach(mime)
-
-            imgCnt = imgCnt + 1
-
-    try:
-        context = ssl.create_default_context()
-        smtp_server = smtplib.SMTP(smtp, port)
-        smtp_server.starttls(context=context)
-        smtp_server.ehlo()
-        smtp_server.login(user, password)
-        smtp_server.sendmail(sent_from, to_address, message.as_string())
-        smtp_server.close()
-        print ("Email sent successfully!")
-    except Exception as ex:
-        print ("Something went wrong….",ex)
-
+        print ("Something went wrong….", str(ex))
