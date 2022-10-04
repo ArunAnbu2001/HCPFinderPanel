@@ -140,12 +140,16 @@
                     <div id="processing">Please Wait . . . This may take a while.</div>
                 </div>
             </div>
-        </div>
-        <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
+        </div> 
+        <div style="position: fixed;width:100%;bottom:0;" class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
             <!-- Right -->
-            <div style="color: white;font-size: 14px;">Copyright ©️ 2020-2022 MASORI Therapeutics Corporation.
+            <div style="color: white;font-size: 14px;">Copyright ©️ 2020-2022 MASORI Therapeutics Corporation. All rights reserved.
                 <br>
             </div>
+            <a href="#" style="color: white;font-size: 18px;">Masori
+                <br>
+            </a>
+            
             <!-- Right -->
         </div>
     </section>
@@ -159,10 +163,26 @@
 
 <script>
     function verify() {
+        $(document).ready(function() {
+            $('#firstname').attr('disabled',true);
+            $('#lastname').attr('disabled',true);
+            $('#Contact').attr('disabled',true);
+            $('#City').attr('disabled',true);
+        });
+        
         var data = new FormData();
-        var pattern = /^[0-9]{10}$/;
+        var pattern = /^[0-9]+$/;
 
         data.append('Npi', $("#npinumber").val());
+        
+        $('#firstname').attr('disabled',true);
+        $('#lastname').attr('disabled',true);
+        $('#Contact').attr('disabled',true);
+        $('#City').attr('disabled',true);
+        $("#firstname").val('');
+        $("#lastname").val('');
+        $("#Contact").val('');
+        $("#City").val('');
 
         if ($('#npinumber').val() == '') {
             toastr.error("Please fill the Npinumber.", "Attempt Failed!", {
@@ -176,7 +196,14 @@
                 hideMethod: "slideUp",
                 timeOut: 5e3
             });
-        } else {
+        } else if($('#npinumber').val().length != 10){
+            toastr.error("Invalid NPI Number.", "NPI Verification Attempt Failed!", {
+                showMethod: "slideDown",
+                hideMethod: "slideUp",
+                timeOut: 5e3
+            });
+        }
+        else {
             $('#processing').show();
             $.ajax({
                 type: 'POST',
@@ -197,6 +224,11 @@
                             hideMethod: "slideUp",
                             timeOut: 5e3
                         });
+                    } else {
+                        $('#firstname').attr('disabled',false);
+                        $('#lastname').attr('disabled',false);
+                        $('#Contact').attr('disabled',false);
+                        $('#City').attr('disabled',false);
                     }
                 },
                 error: function(err) {
@@ -214,7 +246,7 @@
         data.append('lastname', $("#lastname").val());
         data.append('Contact', $("#Contact").val());
         data.append('City', $("#City").val());
-        var pattern = /^[0-9]{10}$/;
+        var pattern = /^[0-9]+$/;
 
         if ($('#npinumber').val() == '' || $("#firstname").val() == '' || $("#lastname").val() == '' ||
             $("#Contact").val() == '' || $("#City").val() == '') {
@@ -230,6 +262,12 @@
                 timeOut: 5e3
             });
         } else if (!pattern.test($('#npinumber').val())) {
+            toastr.error("Please verify the NPI Number.", "Attempt Failed!", {
+                showMethod: "slideDown",
+                hideMethod: "slideUp",
+                timeOut: 5e3
+            });
+        } else if($('#npinumber').val().length != 10){
             toastr.error("Please verify the NPI Number.", "Attempt Failed!", {
                 showMethod: "slideDown",
                 hideMethod: "slideUp",
@@ -315,6 +353,10 @@
         $("#processing").show();
         inputs.forEach(input => input.value = '');
         $('input[type="checkbox"]:checked').prop('checked', false);
+        $('#firstname').attr('disabled',true);
+        $('#lastname').attr('disabled',true)
+        $('#Contact').attr('disabled',true);
+        $('#City').attr('disabled',true);
         $("#processing").hide();
 
     });
