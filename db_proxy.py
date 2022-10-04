@@ -512,7 +512,7 @@ def update_opt():
         contact_num = ''.join(i for i in Contact if i.isdigit())
         City=request.form['City']
         
-        check_npi = pd.read_sql_query("Select Firstname, Lastname, ContactNumber, City, NPI from register_data Where NPI='"+Npinumber+"'", conn)
+        check_npi = pd.read_sql_query("Select Firstname, Lastname, ContactNumber, City, Email, NPI from register_data Where NPI='"+Npinumber+"'", conn)
         if check_npi.empty:
             return False
         else:
