@@ -34,6 +34,10 @@ def login():
 def register_click():
     return render_template('register1.html')
 
+@application.route('/doctor_details')
+def doctor_details():
+    return render_template('doctor_details.html')
+
 @application.route('/logon', methods=['POST'])
 def logon():
     res = False
