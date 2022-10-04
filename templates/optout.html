@@ -72,7 +72,7 @@
 
 <body>
     <!--  -->
-    <section class="vh-100">
+    <section class="body-section">
         <div class="container-fluid h-custom">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-md-9 col-lg-6 col-xl-5">
@@ -80,8 +80,8 @@
                 </div>
                 <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                     <div>
-                        <h4>OPT-OUT</h4><br>
-                    </div>
+                      <center><h4>OPT-OUT</h4></center><br>
+                    </div>                            By checking this box and clicking “Opt-out” below, you acknowledge and agree that your practice details will no longer appear within the Healthcare Provider Locator search results. Please allow up to 72 hours for processing.                            By checking this box and clicking “Opt-out” below, you acknowledge and agree that your practice details will no longer appear within the Healthcare Provider Locator search results. Please allow up to 72 hours for processing.
                     <!--NPI input -->
 
                     <div class="row">
@@ -125,9 +125,7 @@
                     <div class="form-group relative">
                         <label class="inline-checkboxes tos">
                             <br><input id="terms-check" type="checkbox">
-                            By checking this box, you acknowledge and agree that your practice 
-                            details will no longer appear within the Healthcare Provider Finder 
-                            search results. Please allow up to 72 hours for processing. 
+                            By checking this box and clicking “Opt-out” below, you acknowledge and agree that your practice details will no longer appear within the Healthcare Provider Locator search results. Please allow up to 72 hours for processing.
                             <a href="{{ url_for('static', filename='MASORIHCPFinderRegistrationTermsConditions.pdf', _external=True) }}" target="_blank" style="text-decoration: none;">Terms and Conditions</a>.
                             <br>  
                         </label>
@@ -135,7 +133,13 @@
 
                     <div class="text-center text-lg-start mt-1 pt-2">
                         <br>
-                        <p align="right"><button id="clr_btn" class="btn btn-primary btn-lg;" style="width:150px; font-size:center;background-color: aliceblue;color:green;" onclick="clear();">Clear</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <p align="right">if (obj == true){
+                        toastr.success("Your request to opt-out has been received and is processing...", {
+                            showMethod: "slideDown",
+                            hideMethod: "slideUp",
+                            timeOut: 5e3
+                        });
+                    }<button id="clr_btn" class="btn btn-primary btn-lg;" style="width:150px; font-size:center;background-color: aliceblue;color:green;" onclick="clear();">Clear</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <button id="opt_btn" class="btn btn-primary btn-lg;" style="width:150px; font-size:center;" onclick="Optout()">Opt-Out</button>
                         </p>
                     </div>
@@ -284,11 +288,11 @@
                         });
                     }
 
-                    if (obj == true) {
-                        toastr.success("You have successfully updated.", "Updated!", {
+                    if (obj == true){
+                        toastr.success("Your request to opt-out has been received and is processing...", {
                             showMethod: "slideDown",
                             hideMethod: "slideUp",
-                            timeOut: 2e3
+                            timeOut: 5e3
                         });
                     }
 
