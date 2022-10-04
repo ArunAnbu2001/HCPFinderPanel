@@ -546,12 +546,9 @@ def register_mail(firstname, lastname, email):
             <p>
                 You have been registered with HCP finder.
             </p>
-            <br>
             <p>
-                Thanks,
-            </p>
-            <p>
-                <b>Masori Admin Team</b>
+                Thank you in advance,<br>
+                <b>The MASORI Help Desk</b>
             </p>
         </body>
     </html>
@@ -573,12 +570,9 @@ def approve_mail(firstname, lastname, email):
             <p>
                 <b>Staus: </b><b style="color: green;">Approved</b>
             </p>
-            <br>
             <p>
-                Thanks,
-            </p>
-            <p>
-                <b>Masori Admin Team</b>
+                Thank you in advance,<br>
+                <b>The MASORI Help Desk</b>
             </p>
         </body>
     </html>
@@ -600,12 +594,9 @@ def reject_mail(firstname, lastname, email):
             <p>
                 <b>Staus: </b><b style="color: red;">Rejected</b>  
             </p>
-            <br>
             <p>
-                Thanks,
-            </p>
-            <p>
-                <b>Masori Admin Team</b>
+                Thank you in advance,<br>
+                <b>The MASORI Help Desk</b>
             </p>
         </body>
     </html>
