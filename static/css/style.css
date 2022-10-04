@@ -172,3 +172,14 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+.body-section{
+    height: 110vh !important;
+}
+
+@media screen and (max-width: 991px) {
+    .body-section{
+        height: 120vh !important;
+    }
+
+}
