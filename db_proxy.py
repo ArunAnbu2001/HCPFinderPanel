@@ -543,35 +543,7 @@ def register_mail(firstname, lastname, email):
             <p>
                 Dear """ + firstname + " " + lastname + """,
             </p>
-            <p
-def optout_mail(firstname, lastname, contact, city, npi, email):
-    body = """
-    <html>
-        <body>
             <p>
-                Dear Acadia Pharmaceuticals,
-            </p>
-            <p>
-            The following HCP has requested to opt-out from the Acadia HCP Locator 
-            and will be removed from the search results within 72 hours.
-            </p>
-            <p>
-                """ + npi + """ - Verified<br>
-                """ + firstname + """<br>
-                """ + lastname + """<br>
-                """ + contact + """<br>
-                """ + city + """<br>
-            </p>
-            <p>
-                Thank you in advance,<br>
-                <b>The MASORI Help Desk</b>
-            </p>
-        </body>
-    </html>
-    """
-    mail.SendMail(email, "You have been Requested to Opt-Out - HCP Finder", body, [])
-    return
-
                 You have been registered with HCP finder.
             </p>
             <br>
