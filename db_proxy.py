@@ -161,16 +161,15 @@ def bulk_upload():
                 password=row['Password']
                 password = EnDe.encode(password).decode()
                 contactnumber= row['ContactNumber']
-                designation=row['Designation']
+                designation=row['Speciality']
                 street=row['Street']
                 city=row['City']
                 state=row['State']
                 country=row['Country']
                 zipcode=row['Zipcode']
+                npi=row['NPI']
 
                 check_email = pd.read_sql_query("Select Email from register_data Where Email='" +email+"'", conn)
-                print('Email Id: ', email)
-                print(check_email)
 
                 if check_email.empty:
                     address = str(street)+","+str(city)+","+str(state) + \
@@ -190,7 +189,7 @@ def bulk_upload():
                     lng = geometry['location']['lng']
 
                     cur=conn.cursor()
-                    cur.execute("insert into register_data (Firstname,Lastname,Password,ContactNumber,Email,Street,City,State,Country,Zipcode,Designation,Latitude,Longitude,Status) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",(firstname,lastname,password,contactnumber,email,street,city,state,country,zipcode,designation,lat,lng,'Pending'))
+                    cur.execute("insert into register_data (Firstname,Lastname,Password,ContactNumber,Email,Street,City,State,Country,Zipcode,Designation,NPI,Latitude,Longitude,Status) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",(firstname,lastname,password,contactnumber,email,street,city,state,country,zipcode,designation,npi,lat,lng,'Pending'))
                     conn.commit()
                     cur.close()
                 
