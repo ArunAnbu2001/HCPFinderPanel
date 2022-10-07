@@ -168,15 +168,16 @@ def get_pagination_data():
         
         count_data = pd.read_sql_query("select count(*) as total from register_data", conn)
         totalRecords = count_data['total'].iloc[0]
-
-        likeString = "%" + searchValue +"%"
-        filter_count_data = pd.read_sql_query("SELECT count(*) as total from register_data WHERE Firstname LIKE '"+likeString+"' OR Lastname LIKE '"+likeString+"' OR Designation LIKE '"+likeString+" ' ;", conn)
+        
+        likeString = "%" + str(searchValue) +"%"
+        filter_count_data = pd.read_sql_query("SELECT count(*) as total from register_data WHERE Firstname LIKE '"+likeString+"' OR Lastname LIKE '"+likeString+"' OR Designation LIKE '"+likeString+"' OR ContactNumber LIKE '"+likeString+"' OR Email LIKE '"+likeString+"' OR Street LIKE '"+likeString+"' OR City LIKE '"+likeString+"' OR State LIKE '"+likeString+"' OR Zipcode LIKE '"+likeString+"' OR NPI LIKE '"+likeString+"' ;", conn)
         totalRecordwithFilter = filter_count_data['total'].iloc[0]
 
         if searchValue=='':
             data = pd.read_sql_query("SELECT * FROM register_data ORDER BY ID asc limit "+ str(row) +", "+ str(rowperpage) +";", conn)
         else:
-            data = pd.read_sql_query("SELECT * FROM register_data WHERE Firstname LIKE '"+likeString+"' OR Lastname LIKE '"+likeString+"' OR Designation LIKE '"+likeString+"' limit "+str(row)+", "+str(rowperpage)+";", conn)
+            data = pd.read_sql_query("SELECT * FROM register_data WHERE Firstname LIKE '"+likeString+"' OR Lastname LIKE '"+likeString+"' OR Designation LIKE '"+likeString+"' OR ContactNumber LIKE '"+likeString+"' OR Email LIKE '"+likeString+"' OR Street LIKE '"+likeString+"' OR City LIKE '"+likeString+"' OR State LIKE '"+likeString+"' OR Zipcode LIKE '"+likeString+"' OR NPI LIKE '"+likeString+"' limit "+str(row)+", "+str(rowperpage)+";", conn)
+        
         
         new_dfs = []
         for idx, row in data.iterrows():
