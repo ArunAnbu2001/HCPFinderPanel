@@ -14,11 +14,11 @@ def register():
     if request.method == 'POST':
 
         conn = mysql.connector.connect(
-            host="hcpfinder.ckquopjoteib.us-east-2.rds.amazonaws.com", 
-            user="masoriadmin", 
+            host=str(EnDe.decode("aGNwZmluZGVyLmNrcXVvcGpvdGVpYi51cy1lYXN0LTIucmRzLmFtYXpvbmF3cy5jb20=")), 
+            user=str(EnDe.decode("bWFzb3JpYWRtaW4=")), 
             port='3306', 
-            password='Masori123$',
-            database="hcpfinder")
+            password=str(EnDe.decode("YiVFWnVYOGtMaGdqZSFMIw==")),
+            database=str(EnDe.decode("aGNwZmluZGVy")))
 
         cur=conn.cursor()
         firstname = request.form['FirstName']
