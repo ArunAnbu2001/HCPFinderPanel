@@ -10,15 +10,20 @@ from werkzeug.utils import secure_filename
 
 root_path = os.path.dirname(os.path.abspath(__file__))
 
+hs = "aGNwZmluZGVyLmNrcXVvcGpvdGVpYi51cy1lYXN0LTIucmRzLmFtYXpvbmF3cy5jb20="
+us = "bWFzb3JpYWRtaW4="
+ps = "YiVFWnVYOGtMaGdqZSFMIw=="
+ds = "aGNwZmluZGVy"
+
 def register():
     if request.method == 'POST':
 
         conn = mysql.connector.connect(
-            host=str(EnDe.decode("aGNwZmluZGVyLmNrcXVvcGpvdGVpYi51cy1lYXN0LTIucmRzLmFtYXpvbmF3cy5jb20=")), 
-            user=str(EnDe.decode("bWFzb3JpYWRtaW4=")), 
+            host=str(EnDe.decode(hs)), 
+            user=str(EnDe.decode(us)), 
             port='3306', 
-            password=str(EnDe.decode("YiVFWnVYOGtMaGdqZSFMIw==")),
-            database=str(EnDe.decode("aGNwZmluZGVy")))
+            password=str(EnDe.decode(ps)),
+            database=str(EnDe.decode(ds)))
 
         cur=conn.cursor()
         firstname = request.form['FirstName']
@@ -71,11 +76,11 @@ def register():
     
 def check_user(email,password):
     conn = mysql.connector.connect(
-        host="hcpfinder.ckquopjoteib.us-east-2.rds.amazonaws.com", 
-        user="masoriadmin", 
+        host=str(EnDe.decode(hs)), 
+        user=str(EnDe.decode(us)), 
         port='3306', 
-        password='Masori123$',
-        database="hcpfinder")   
+        password=str(EnDe.decode(ps)),
+        database=str(EnDe.decode(ds)))   
 
     password = EnDe.encode(password).decode()
     usertype = ''
@@ -103,11 +108,11 @@ def check_user(email,password):
 
 def get_register_table():
     conn = mysql.connector.connect(
-        host="hcpfinder.ckquopjoteib.us-east-2.rds.amazonaws.com", 
-        user="masoriadmin", 
+        host=str(EnDe.decode(hs)), 
+        user=str(EnDe.decode(us)), 
         port='3306', 
-        password='Masori123$',
-        database="hcpfinder") 
+        password=str(EnDe.decode(ps)),
+        database=str(EnDe.decode(ds))) 
 
     data = pd.read_sql_query("Select * from register_data", conn)
 
@@ -135,11 +140,11 @@ def get_register_table():
 
 def bulk_upload():
     conn = mysql.connector.connect(
-        host="hcpfinder.ckquopjoteib.us-east-2.rds.amazonaws.com", 
-        user="masoriadmin", 
+        host=str(EnDe.decode(hs)), 
+        user=str(EnDe.decode(us)), 
         port='3306', 
-        password='Masori123$',
-        database="hcpfinder") 
+        password=str(EnDe.decode(ps)),
+        database=str(EnDe.decode(ds))) 
 
     folder_path = 'static/upload_data'
  
@@ -203,11 +208,11 @@ def bulk_upload():
 def reject_doctor():
     if request.method=="POST":
         conn = mysql.connector.connect(
-            host="hcpfinder.ckquopjoteib.us-east-2.rds.amazonaws.com", 
-            user="masoriadmin", 
+            host=str(EnDe.decode(hs)), 
+            user=str(EnDe.decode(us)), 
             port='3306', 
-            password='Masori123$',
-            database="hcpfinder")
+            password=str(EnDe.decode(ps)),
+            database=str(EnDe.decode(ds)))
 
         id=request.form['id']
         firstname=request.form['firstname']
@@ -225,11 +230,11 @@ def reject_doctor():
 def reject_reason_doctor():
     if request.method=="POST":
         conn = mysql.connector.connect(
-            host="hcpfinder.ckquopjoteib.us-east-2.rds.amazonaws.com", 
-            user="masoriadmin", 
+            host=str(EnDe.decode(hs)), 
+            user=str(EnDe.decode(us)), 
             port='3306', 
-            password='Masori123$',
-            database="hcpfinder")
+            password=str(EnDe.decode(ps)),
+            database=str(EnDe.decode(ds)))
 
         id=request.form['id']
         reason=request.form['reason']
@@ -243,11 +248,11 @@ def reject_reason_doctor():
 def approve_doctor():
     if request.method=="POST":
         conn = mysql.connector.connect(
-            host="hcpfinder.ckquopjoteib.us-east-2.rds.amazonaws.com", 
-            user="masoriadmin", 
+            host=str(EnDe.decode(hs)), 
+            user=str(EnDe.decode(us)), 
             port='3306', 
-            password='Masori123$',
-            database="hcpfinder")
+            password=str(EnDe.decode(ps)),
+            database=str(EnDe.decode(ds)))
 
         id=request.form['id']
         firstname=request.form['firstname']
@@ -265,11 +270,11 @@ def approve_doctor():
 def pending_doctor():
     if request.method=="POST":
         conn = mysql.connector.connect(
-            host="hcpfinder.ckquopjoteib.us-east-2.rds.amazonaws.com", 
-            user="masoriadmin", 
+            host=str(EnDe.decode(hs)), 
+            user=str(EnDe.decode(us)), 
             port='3306', 
-            password='Masori123$',
-            database="hcpfinder")
+            password=str(EnDe.decode(ps)),
+            database=str(EnDe.decode(ds)))
 
         id = request.form['Id']
         status = request.form['Status']
@@ -284,11 +289,11 @@ def pending_doctor():
 def delete_doctor():
     if request.method=="POST":
         conn = mysql.connector.connect(
-            host="hcpfinder.ckquopjoteib.us-east-2.rds.amazonaws.com", 
-            user="masoriadmin", 
+            host=str(EnDe.decode(hs)), 
+            user=str(EnDe.decode(us)), 
             port='3306', 
-            password='Masori123$',
-            database="hcpfinder")
+            password=str(EnDe.decode(ps)),
+            database=str(EnDe.decode(ds)))
 
         id=request.form['id']
 
@@ -302,11 +307,11 @@ def change_password():
     
     if request.method=="POST":
         conn = mysql.connector.connect(
-            host="hcpfinder.ckquopjoteib.us-east-2.rds.amazonaws.com", 
-            user="masoriadmin", 
+            host=str(EnDe.decode(hs)), 
+            user=str(EnDe.decode(us)), 
             port='3306', 
-            password='Masori123$',
-            database="hcpfinder")
+            password=str(EnDe.decode(ps)),
+            database=str(EnDe.decode(ds)))
         cur=conn.cursor()
         email = session["email"]
 
@@ -332,11 +337,11 @@ def update_data():
 
     if request.method == 'POST':
         conn = mysql.connector.connect(
-            host="hcpfinder.ckquopjoteib.us-east-2.rds.amazonaws.com", 
-            user="masoriadmin", 
+            host=str(EnDe.decode(hs)), 
+            user=str(EnDe.decode(us)), 
             port='3306', 
-            password='Masori123$',
-            database="hcpfinder")
+            password=str(EnDe.decode(ps)),
+            database=str(EnDe.decode(ds)))
 
         cur=conn.cursor()
         email = session["email"]
@@ -382,11 +387,11 @@ def update_profile():
     
     if request.method == 'POST':
         conn = mysql.connector.connect(
-            host="hcpfinder.ckquopjoteib.us-east-2.rds.amazonaws.com", 
-            user="masoriadmin", 
+            host=str(EnDe.decode(hs)), 
+            user=str(EnDe.decode(us)), 
             port='3306', 
-            password='Masori123$',
-            database="hcpfinder")
+            password=str(EnDe.decode(ps)),
+            database=str(EnDe.decode(ds)))
 
         cur=conn.cursor()
         email = session["email"]
@@ -462,11 +467,11 @@ def fetch():
     if request.method == 'GET':
         email = session['email']
         conn = mysql.connector.connect(
-            host="hcpfinder.ckquopjoteib.us-east-2.rds.amazonaws.com", 
-            user="masoriadmin", 
+            host=str(EnDe.decode(hs)), 
+            user=str(EnDe.decode(us)), 
             port='3306', 
-            password='Masori123$',
-            database="hcpfinder")
+            password=str(EnDe.decode(ps)),
+            database=str(EnDe.decode(ds)))
         cursor=conn.cursor()
         user_check="Select * from register_data Where Email='"+email+"'"
         cursor.execute(user_check)
@@ -483,11 +488,11 @@ def fetch():
 
 def fetch_opt(Npinumber):
         conn = mysql.connector.connect(
-            host="hcpfinder.ckquopjoteib.us-east-2.rds.amazonaws.com", 
-            user="masoriadmin", 
+            host=str(EnDe.decode(hs)), 
+            user=str(EnDe.decode(us)), 
             port='3306', 
-            password='Masori123$',
-            database="hcpfinder")
+            password=str(EnDe.decode(ps)),
+            database=str(EnDe.decode(ds)))
         
         check_npi = pd.read_sql_query("Select NPI from register_data Where NPI='"+Npinumber+"'", conn)
         if check_npi.empty:
@@ -498,11 +503,11 @@ def fetch_opt(Npinumber):
 def update_opt():
     if request.method=="POST":
         conn = mysql.connector.connect(
-            host="hcpfinder.ckquopjoteib.us-east-2.rds.amazonaws.com", 
-            user="masoriadmin", 
+            host=str(EnDe.decode(hs)), 
+            user=str(EnDe.decode(us)), 
             port='3306', 
-            password='Masori123$',
-            database="hcpfinder")
+            password=str(EnDe.decode(ps)),
+            database=str(EnDe.decode(ds)))
 
         Npinumber=request.form['Npi']
         firstname=request.form['firstname']
