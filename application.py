@@ -62,6 +62,11 @@ def get_register_table():
     intent=db_proxy.get_register_table()
     return intent.to_json(orient="index")
 
+@application.route("/partial_load" ,methods=["GET","POST"])
+def partial_load():
+    intent=db_proxy.get_pagination_data()
+    return json.dumps(intent, default=str)
+
 @application.route('/bulk_upload', methods=['GET', 'POST'])
 def bulk_upload():
     intent=db_proxy.bulk_upload()
