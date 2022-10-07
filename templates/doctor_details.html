@@ -810,14 +810,7 @@
                 serverSide: true,
                 serverMethod:'post',
                 ajax: {
-                    url:'/partial_load',
-                    beforeSend: function(){
-                    $('.datatables-basic > tbody').html(
-                    '<tr class="odd">' +
-                        '<td valign="top" colspan="10" class="dataTables_empty">Loading, Please Wait&hellip;</td>' +
-                    '</tr>'
-                    );
-                }
+                    url:'/partial_load'
                 },
                 paging: true,
                 searching: true,
