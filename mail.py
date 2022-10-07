@@ -2,9 +2,10 @@
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+import EnDe
 
-from_addr = 'acadiahcpfinder@masori.com'
-pwd = "ZN'YP!%Uaawyd&rC"
+from_addr = str(EnDe.decode("YWNhZGlhaGNwZmluZGVyQG1hc29yaS5jb20="))
+pwd = str(EnDe.decode("Wk4nWVAhJVVhYXd5ZCZyQw=="))
 
 def SendMail (to_addr, subject, body, attachment):
 
