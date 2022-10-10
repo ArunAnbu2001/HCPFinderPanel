@@ -86,7 +86,7 @@ def check_user(email,password):
     usertype = ''
 
     user = pd.read_sql_query("Select * from register_data Where Email='" +
-                        email+"' and Password='"+password+"'", conn)
+                        email+"' and Password='"+password+"' and Status='Approved'", conn)
     if user.empty:
         admin = pd.read_sql_query("Select * from Admins Where username='" +
                         email+"' and password='"+password+"'", conn)
@@ -549,7 +549,7 @@ def fetch_opt(Npinumber):
             password=str(EnDe.decode(ps)),
             database=str(EnDe.decode(ds)))
         
-        check_npi = pd.read_sql_query("Select NPI from register_data Where NPI='"+Npinumber+"'", conn)
+        check_npi = pd.read_sql_query("Select NPI from register_data Where NPI='"+Npinumber+"' and Status='Approved'", conn)
         if check_npi.empty:
             return False
         else:
