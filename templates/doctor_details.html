@@ -101,7 +101,7 @@
                     <div class="mb-1">
                         <label class="form-label">Designation</label>
                         <select class="form-control" name="Designation" id="Designation">
-                            <option value="Select Designation" selected>Select Designation</option>
+                            <option value="" selected>Select Designation</option>
                             <option value="M.D.">M.D.</option>
                             <option value="D.O.">D.O.</option>
                             <option value="N.P.">N.P.</option>
@@ -480,13 +480,15 @@
             $("#lastname").val(lastname);
             $("#Email").val(email);
             $("#Contact").val(contactnum);
-            $("#Designation").append('<option value="'+designation +'">' + designation + '</option>');
-            document.getElementById("Designation").value=designation;
+            //$("#Designation").append('<option value="'+designation +'">' + designation + '</option>');
+            //document.getElementById("Designation").value=designation;
+            $("#Designation").val(designation);
             $("#Street").val(address[0]);
             $("#City").val(address[1]);
             $("#State").val(address[2]);
-            $("#Country").append('<option value="'+address[3] +'">' + address[3] + '</option>');
-            document.getElementById("Country").value=address[3]; 
+            //$("#Country").append('<option value="'+address[3] +'">' + address[3] + '</option>');
+            //document.getElementById("Country").value=address[3]; 
+            $("#Country").val(address[3]);
             $("#zipcode").val(address[4]);
             $("#license").val(license);
             $("#npi").val(NPI);
@@ -808,6 +810,7 @@
         function load_data() {
             $('#processing').show();
             $(".datatables-basic").DataTable({
+                destroy: true,
                 processing: true,
                 serverSide: true,
                 serverMethod:'post',
