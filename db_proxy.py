@@ -14,6 +14,7 @@ hs = "aGNwZmluZGVyLmNrcXVvcGpvdGVpYi51cy1lYXN0LTIucmRzLmFtYXpvbmF3cy5jb20="
 us = "bWFzb3JpYWRtaW4="
 ps = "YiVFWnVYOGtMaGdqZSFMIw=="
 ds = "aGNwZmluZGVy"
+API_KEY = "AIzaSyCUCzgqm0XAkC68zLwI2hwoLwpwJEw6_Dc"
 
 def register():
     if request.method == 'POST':
@@ -48,8 +49,6 @@ def register():
 
             address = str(street)+","+str(city)+","+str(state) + \
             ", United States,"+str(zipcode)
-
-            API_KEY = "AIzaSyCUCzgqm0XAkC68zLwI2hwoLwpwJEw6_Dc"
 
             params = {
                 'key': API_KEY,
@@ -235,8 +234,6 @@ def bulk_upload():
                     address = str(street)+","+str(city)+","+str(state) + \
                     ", United States,"+str(zipcode)
 
-                    API_KEY = "AIzaSyCUCzgqm0XAkC68zLwI2hwoLwpwJEw6_Dc"
-
                     params = {
                         'key': API_KEY,
                         'address': address
@@ -418,7 +415,6 @@ def update_data():
         address = str(street)+","+str(city)+","+str(state) + \
             ", United States,"+str(zipcode)
 
-        API_KEY = "AIzaSyCUCzgqm0XAkC68zLwI2hwoLwpwJEw6_Dc"
         params = {
             'key': API_KEY,
             'address': address
@@ -483,7 +479,7 @@ def update_profile():
         if (firstname1==firstname or lastname1==lastname or contactnumber1==contactnumber or email1==email or street1==street or city1==city or state1==state or country1==country or designation1==designation or zipcode1==zipcode or License1==License or Npi1==Npi):       
             address = str(street)+","+str(city)+","+str(state) + \
             ", United States,"+str(zipcode)
-            API_KEY = "AIzaSyCUCzgqm0XAkC68zLwI2hwoLwpwJEw6_Dc"
+            
             params = {
                 'key': API_KEY,
                 'address': address
@@ -502,7 +498,7 @@ def update_profile():
         else: 
             address = str(street)+","+str(city)+","+str(state) + \
             ", United States,"+str(zipcode)
-            API_KEY = "AIzaSyCUCzgqm0XAkC68zLwI2hwoLwpwJEw6_Dc"
+            
             params = {
                 'key': API_KEY,
                 'address': address
@@ -594,6 +590,8 @@ def update_opt():
 
                     return True
 
+def get_gmkey():
+    return API_KEY
 
 def register_mail(firstname, lastname, email):
     body = """

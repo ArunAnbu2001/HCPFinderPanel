@@ -129,6 +129,11 @@ def update_opt():
     res = db_proxy.update_opt()
     return json.dumps(res)
 
+@application.route('/get_gmkey', methods=['POST'])
+def get_gmkey():
+    res = db_proxy.get_gmkey()
+    return json.dumps(res)
+
 @application.route('/logout', methods=['GET', 'POST'])
 def logout():
     status = ""
