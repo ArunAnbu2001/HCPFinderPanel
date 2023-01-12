@@ -16,18 +16,6 @@ ps = "YiVFWnVYOGtMaGdqZSFMIw=="
 ds = "aGNwZmluZGVy"
 API_KEY = "AIzaSyCUCzgqm0XAkC68zLwI2hwoLwpwJEw6_Dc"
 
-conn = mysql.connector.connect(
-            host=str(EnDe.decode(hs)), 
-            user=str(EnDe.decode(us)), 
-            port='3306', 
-            password=str(EnDe.decode(ps)),
-            database=str(EnDe.decode(ds)))
-qry = "ALTER TABLE `hcpfinder`.`register_data` CHANGE COLUMN `Zipcode` `Zipcode` VARCHAR(11) NULL DEFAULT NULL;"
-cur=conn.cursor()
-cur.execute(qry)
-conn.commit()
-cur.close()
-
 def register():
     if request.method == 'POST':
 
