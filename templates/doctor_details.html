@@ -363,16 +363,16 @@
                     buttonStyling: !1,
                 })
             } 
-            //else if (!validzip.test($('#zipcode').val())) {
-            //    Swal.fire({
-            //        title: "Please specify a valid US zip code.",
-            //        icon: "warning",
-            //        customClass: {
-            //            ConfirmButton: "btn btn-primary",
-            //        },
-            //        buttonStyling: !1,
-            //    })
-            //} 
+            else if (!validzip.test($('#zipcode').val())) {
+                Swal.fire({
+                    title: "Please specify a valid US zip code.",
+                    icon: "warning",
+                    customClass: {
+                        ConfirmButton: "btn btn-primary",
+                    },
+                    buttonStyling: !1,
+                })
+            } 
             else {
                 data.append('FirstName', $("#firstname").val());
                 data.append('LastName', $("#lastname").val());
