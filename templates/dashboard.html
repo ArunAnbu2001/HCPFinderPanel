@@ -1,0 +1,509 @@
+{% extends 'layout.html' %} {% block content %}
+
+<style>
+    body {
+        background-color: #f4f4f4f1;
+    }
+</style>
+
+<script type="text/javascript" src="https://code.jscharting.com/latest/jscharting.js"></script>
+<script type="text/javascript" src="https://code.jscharting.com/latest/modules/maps.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.bundle.js"></script>
+
+<script src="https://cdn.jsdelivr.net/gh/linways/table-to-excel@v1.0.4/dist/tableToExcel.js"></script>
+
+
+<!-- container -->
+<div class="container content-container">
+
+    <!-- title & filter -->
+    <div class="row mb-3">
+        <div class="col-6">
+            <p class="fw-bold h5">Hi, Welcome Back</p>
+        </div>
+        <div class="col-6">
+            <div class="row">
+                <div class="col">
+                    <label for="month" class="fw-bold">Month:</label>
+                    <select class="form-select" name="month" id="month" onchange="dashboard_data();">
+                        <option value='January'>Janaury</option>
+                        <option value='February'>February</option>
+                        <option value='March'>March</option>
+                        <option value='April'>April</option>
+                        <option value='May'>May</option>
+                        <option value='June'>June</option>
+                        <option value='July'>July</option>
+                        <option value='August'>August</option>
+                        <option value='September'>September</option>
+                        <option value='October'>October</option>
+                        <option value='November'>November</option>
+                        <option value='December'>December</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="year" class="fw-bold">Year:</label>
+                    <select class="form-select" name="year" id="year" onchange="dashboard_data();">
+                        <option value='2022'>2022</option>
+                        <option value='2023'>2023</option>
+                        <option value='2024'>2024</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- dashboard container -->
+    <div id="showdata">
+
+        <!-- tiles -->
+        <div class="row">
+            <div class="col-lg-3 col-sm-6 col-12 d-flex align-items-center">
+                <div class="card  border-start-primary py-2">
+                    <div class="card-body">
+                        <div class="row align-items-center no-gutters">
+                            <div class="text-secondary text-center mb-3">
+                                <span>Total # of Searches (Users)</span>
+                            </div>
+                            <div class="col me-2">
+                                <div class="text-dark h2 mb-0"><span id="total_search"></span></div>
+                            </div>
+                            <div class="col-auto"><i class="fas fa-user fa-2x text-gray-300"></i></div>
+                            <div class="text-secondary"><span>(30 days)</span></div>                   
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-12 d-flex align-items-center">
+                <div class="card  border-start-primary py-2">
+                    <div class="card-body">
+                        <div class="row align-items-center no-gutters">
+                            <div class="text-secondary text-center mb-3">
+                                <span>Total # of HCPs Viewed</span>
+                            </div>
+                            <div class="col me-2">
+                                <div class="text-dark h2 mb-0"><span id="total_hcp"></span></div>
+                            </div>
+                            <div class="col-auto"><i class="fas fa-book-open fa-2x text-gray-300"></i></div>
+                            <div class="text-secondary"><span>(30 days)</span></div>                   
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-12 d-flex align-items-center">
+                <div class="card  border-start-primary py-2">
+                    <div class="card-body">
+                        <div class="row align-items-center no-gutters">
+                            <div class="text-secondary text-center mb-3">
+                                <span>Top Connected HCP</span>
+                            </div>
+                            <div class="col me-2">
+                                <div class="text-dark h6 mb-0"><span id="top_connected_hcp"></span></div>
+                            </div>
+                            <div class="col-auto"><i class="fas fa-link fa-2x text-gray-300"></i></div>
+                            <div class="text-secondary"><span>(30 days)</span></div>                   
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-12 d-flex align-items-center">
+                <div class="card  border-start-primary py-2">
+                    <div class="card-body">
+                        <div class="row align-items-center no-gutters">
+                            <div class="text-secondary text-center mb-3">
+                                <span>Total # of Areas Searched</span>
+                            </div>
+                            <div class="col me-2">
+                                <div class="text-dark h2 mb-0"><span id="total_area"></span></div>
+                            </div>
+                            <div class="col-auto"><i class="fas fa-search fa-2x text-gray-300"></i></div>
+                            <div class="text-secondary"><span>(30 days)</span></div>                   
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- charts (map & bar) -->
+        <div class="row gx-5">
+
+            <!-- map chart -->
+            <div class="col-6">
+                <div class="card  border-start-primary py-2">
+                    <div class="card-body">
+                        <div class="text-secondary fw-bold h4 mb-3">
+                            <span> # of Searches for HCPs</span>
+                        </div>
+                        <div id="chartDiv" style="max-width: 740px;height: 480px;margin: 0px auto;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- grouped bar chart-->
+            <div class="col-6">
+                <div class="card border-start-primary py-2">
+                    <div class="card-body">
+                        <div class="text-secondary fw-bold h4 mb-3">
+                            <span>Users and HCPs Report</span>
+                        </div>
+                        <div id="barchart" style="max-width: 740px;height: 480px !important;margin: 0px auto;">
+                            <canvas id="myChart" ></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- search chart -->
+        <div class="row">
+            <div class="card  border-start-primary py-2">
+                <div class="card-body">
+                    <div class="mb-4">
+                        <div class="text-secondary fw-bold h4 mb-3">
+                            <span>Search Detailed Report</span>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 text-center py-5">
+                                <p style="margin-top: 20%;">Total Number of Searches in</p>
+                                <p class="h2"><b id="top_one_city"></b></p>
+                                <p class="h1"><b id="top_one_city_cnt"></b></p>
+                            </div>
+                            <div id="progress" class="col-4">
+                                <canvas id="progressbar"></canvas>
+                            </div>
+                            <div class="col-4 text-center py-5">
+                                <p class="text-primary fw-bold text-decoration-underline">This week top connected HCPs</p>
+                                <div id="top_week_hcps"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+        </div>
+        
+        <!-- table -->
+        <div class="row">
+            <div class="card  border-start-primary py-2">
+                <div class="card-body">
+                    <div class="mb-4">
+                        <div class="text-secondary fw-bold h4 mb-3">
+                            <span>Lead HCPs Details</span>
+                        </div>
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <table class="datatables-basic table">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Name</th>
+                                                <th>Designation</th>
+                                                <th>Address</th>
+                                                <th>HCP Connected Date</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+            </div>  
+        </div>
+    </div>
+ 
+    <!-- no data container -->
+    <div id="hidedata">
+        <div class="row text-center h-100">
+            <div class="col-12 text-center">
+              <div class="card card-block d-flex" style="height: 120px;margin-top: 50px;">
+                <div class="card-body align-items-center d-flex justify-content-center">
+                    NO DATA AVAILABLE
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+
+<script>
+    function mapChart(data, obj){
+        
+        var chartConfig = {
+            debug: true,
+            type: 'map',
+            palette: {
+            pointValue: '{ %zValue }',
+            colors: ['##ffc100', '#c46668', '#51acba'],
+            ranges: [[0, obj["city_cal"][0]], [obj["city_cal"][0], obj["city_cal"][1]], [obj["city_cal"][1], obj["city_cal"][2]]]
+            },
+            legend: {
+            template: '%icon %value',
+            position: 'bottom'
+            },
+            defaultPoint: {
+            label_text: '%state',
+            tooltip: '<b>%name</b> <br/>Count: { %zValue }'
+            },
+            defaultSeries_shape_padding: 0.02,
+            series: [{ id: 'usMap', map: 'us'}]
+        };
+
+        chartConfig.series[0].points = data;
+        console.log(chartConfig);
+        var chart = JSC.chart('chartDiv', chartConfig);
+    }
+     
+    function barChart(top_dates, search_date_cnt, hcp_date_cnt){ 
+        var ctx = document.getElementById("myChart").getContext("2d");
+
+        var data = {
+            labels: top_dates,
+            datasets: [{
+                label: "# of Searches",
+                backgroundColor: "#ffc100",
+                data: search_date_cnt
+            }, {
+                label: "# of Connected HCPs",
+                backgroundColor: "#f5a623",
+                data: hcp_date_cnt
+            }]
+        };
+
+        var myBarChart = new Chart(ctx, {
+        type: 'bar',
+        data: data,
+        options: {
+            maintainAspectRatio: false,
+            barValueSpacing: 0,
+            scales: {
+                xAxes: [{
+                    gridLines: {
+                        display: false,
+                    }
+                }],   
+                yAxes: [{
+                    display: false,
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        padding: 100,
+                    }
+                }
+            }
+        }
+        });
+
+    }
+
+    function progressBar(top_cities, top_cities_cnt){
+
+        var ctx = document.getElementById('progressbar').getContext('2d');
+		var chart = new Chart(ctx, {
+			type: 'horizontalBar',
+			data: {
+				labels: top_cities,
+				datasets: [{
+					label: 'Count',
+					data: top_cities_cnt,
+					backgroundColor: ['#6cbe0d', '#f5a521', '#ff4747', '#96be25', '#be4d25'],
+					borderWidth: 1
+				}]
+			},
+			options: {
+				responsive: true,
+				maintainAspectRatio: false,
+				legend: {
+					display: false
+				},
+				scales: {
+					xAxes: [{
+                        display: false,
+						ticks: {
+							beginAtZero: true,
+                            max: Math.max.apply(null, top_cities_cnt)
+						}
+					}],
+					yAxes: [{
+                        gridLines: {
+                            display: false,
+                        },
+                        barPercentage: 0.3
+					}]
+				}
+			}
+		});
+    }
+
+    function hcp_table(dataTableValues){
+        $(".datatables-basic").DataTable({
+            destroy: true,
+            paging: true,
+            searching: true,
+            fixedHeader: {
+                header: true,
+                footer: true
+            },
+            
+            data: dataTableValues,
+            dom: 'rBfrtip',
+            buttons: [{
+                extend: 'excelHtml5',
+                text: 'Export to Excel',
+                title: 'download',
+                className: 'btn btn-primary',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            }],
+            columns: [{
+                data: "id",
+                render: function(data, type, row, meta) {
+                    return meta.row + meta.settings._iDisplayStart + 1;
+                }
+            }, {
+                data: "Name"
+            }, {
+                data: "Designation"
+            }, {
+                data: "Address"
+            }, {
+                data: "ConnectedDate"
+            }],
+            columnDefs: [{
+                responsivePriority: 1,
+                targets: 3
+            }],
+            order: [
+                [0, "asc"]
+            ], 
+            displayLength: 10,
+            lengthMenu: [7, 10, 25, 50, 75, 100],
+            responsive: {
+                details: {
+                    display: $.fn.dataTable.Responsive.display.modal({
+                        header: function(e) {
+                            return "Details of " + e.data().full_name
+                        }
+                    }),
+                    type: "column",
+                    renderer: function(e, t, a) {
+                        var s = $.map(a, (function(e, t) {
+                            return "" !== e.title ? '<tr data-dt-row="' + e.rowIdx + '" data-dt-column="' + e.columnIndex + '"><td>' + e.title + ":</td> <td>" + e.data + "</td></tr>" : ""
+                        })).join("");
+                        return !!s && $('<table class="table"/>').append("<tbody>" + s + "</tbody>")
+                    }
+                }
+            }
+        });
+        
+    }
+    
+    function dashboard_data(){
+        $('#processing').show();
+        
+        var data = new FormData();
+        data.append('month', $('#month').val());
+        data.append('year', $('#year').val());
+
+        $.ajax({
+            type: 'POST',
+            enctype: 'multipart/form-data',
+            url: '/get_dashboard_data',
+            processData: false,
+            contentType: false,
+            cache: false,
+            timeout: 800000,
+            data: data,
+            success: function(data) {
+                var obj = JSON.parse(data);
+                if (obj['total_search'] != 0){
+                    $('#showdata').show();
+                    $('#hidedata').hide();
+
+                    $('#total_search').text(obj['total_search']);
+                    $('#total_hcp').text(obj['total_hcp']);
+                    $('#top_connected_hcp').text(obj['top_connected_hcp']);
+                    $('#total_area').text(Object.keys(obj['city_count']).length);
+
+                    var mapStates = 'AL,AK,AZ,AR,CA,CO,CT,DE,FL,GA,HI,ID,IL,IN,IA,KS,KY,LA,ME,MD,MA,MI,MN,MS,MO,MT,NE,NV,NH,NJ,NM,NY,NC,ND,OH,OK,OR,PA,RI,SC,SD,TN,TX,UT,VT,VA,WA,WV,WI,WY'.split(',');
+
+                    var map_data = [];
+                    for (var i = 0; i < mapStates.length; i++){
+                        var map_dict = {};
+                        var city_count = obj['city_count'];
+                        if (Object.keys(city_count).includes(mapStates[i])){
+                            map_dict['map'] = "US." + mapStates[i];
+                            map_dict['z'] = city_count[mapStates[i]];
+                        } else {
+                            map_dict['map'] = "US." + mapStates[i];
+                            map_dict['z'] = 0;
+                        }
+                        
+                        map_data.push(map_dict);
+                    }
+                    
+                    mapChart(map_data, obj);
+                    
+                    $('#barchart').empty();
+                    $('#barchart').append('<canvas id="myChart" height="400px"></canvas>');
+                    barChart(obj['top_dates'], obj['search_date_cnt'], obj['hcp_date_cnt']);
+                    
+                    $('#top_one_city').text(obj['top_one_city']);
+                    $('#top_one_city_cnt').text(obj['top_one_city_cnt']);
+
+                    $('#progress').empty();
+                    $('#progress').append('<canvas id="progressbar"></canvas>');
+                    progressBar(obj['top_cities'], obj['top_cities_cnt']);
+
+                    $('#top_week_hcps').empty();
+                    for (var i = 0; i < obj['top_week_names'].length; i++) {
+                        $('#top_week_hcps').append('<p style="text-align:right"><span style="float:left">'+ obj['top_week_names'][i] +'</span>'+ obj['top_week_designation'][i] +'</p>');
+                    }
+
+                    var dataTableValues = []
+                    for (var i = 0; i < Object.keys(obj['hcp_table_data']).length; i++) {
+                        dataTableValues.push(obj['hcp_table_data'][i])
+                    }
+                    hcp_table(dataTableValues);
+
+                } else {
+                    $('#showdata').hide();
+                    $('#hidedata').show();
+                }
+                
+                $('#processing').hide();
+            }
+        });
+    }
+
+    $(document).ready(function() {
+        
+        var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        $('#month').val(months[new Date().getMonth()]);
+
+        var nextYear = new Date().getFullYear() + 1;
+
+        $("#year").find('option').remove();
+        for (var i = 2022; i<=nextYear; i++) {
+            if (i == new Date().getFullYear()){
+                $("#year").append('<option selected value="' + i + '">' + i + '</option>');
+            } else {
+                $("#year").append('<option value="' + i + '">' + i + '</option>');
+            }
+        }
+
+        dashboard_data();
+    });
+    
+</script>
+
+
+{% endblock %}    
