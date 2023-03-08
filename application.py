@@ -37,6 +37,10 @@ def register_click():
 @application.route('/doctor_details')
 def doctor_details():
     return render_template('doctor_details.html')
+   
+@application.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
 
 @application.route('/logon', methods=['POST'])
 def logon():
