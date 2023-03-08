@@ -6,6 +6,9 @@ import requests
 import pandas as pd
 import mysql.connector
 
+from uszipcode import SearchEngine
+engine = SearchEngine()
+
 from flask import request, session
 from werkzeug.utils import secure_filename
 
