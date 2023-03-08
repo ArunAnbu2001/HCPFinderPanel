@@ -248,6 +248,8 @@
 
 <script>
     function mapChart(data, obj){
+        console.log(obj['city_cal']);
+	    
         var chartConfig = {
             debug: true,
             type: 'map',
@@ -310,7 +312,7 @@
                     display: false,
                     ticks: {
                         beginAtZero: true,
-                        max: max_value + 2
+                        max: max_value + 1
                     }
                 }]
             },
