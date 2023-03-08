@@ -12,18 +12,42 @@ Register_users=[]
 
 @application.route('/home')
 def home():
+    try:
+        if session["email"] == "":
+            return render_template('login.html')
+    except:
+        return render_template('login.html')
+    
    return render_template('land.html')
 
 @application.route('/profile')
 def profile():
+    try:
+        if session["email"] == "":
+            return render_template('login.html')
+    except:
+        return render_template('login.html')
+    
    return render_template('profilepage2.html') 
 
 @application.route('/changepassword')
 def changepassword():
+    try:
+        if session["email"] == "":
+            return render_template('login.html')
+    except:
+        return render_template('login.html')
+    
    return render_template('changepwd.html') 
 
 @application.route('/profile_edit')
 def profile_edit():
+    try:
+        if session["email"] == "":
+            return render_template('login.html')
+    except:
+        return render_template('login.html')
+    
    return render_template('profileedit.html') 
 
 @application.route('/')
@@ -32,14 +56,32 @@ def login():
 
 @application.route('/register_click')
 def register_click():
+    try:
+        if session["email"] == "":
+            return render_template('login.html')
+    except:
+        return render_template('login.html')
+    
     return render_template('register1.html')
 
 @application.route('/doctor_details')
 def doctor_details():
+    try:
+        if session["email"] == "":
+            return render_template('login.html')
+    except:
+        return render_template('login.html')
+    
     return render_template('doctor_details.html')
    
 @application.route('/dashboard')
 def dashboard():
+    try:
+        if session["email"] == "":
+            return render_template('login.html')
+    except:
+        return render_template('login.html')
+    
     return render_template('dashboard.html')
 
 @application.route('/logon', methods=['POST'])
@@ -48,9 +90,10 @@ def logon():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
+      
+        session["email"] = email
 
         res, usertype, username = db_proxy.check_user(email, password)
-        print(usertype)
         session['UserType'] = usertype
         session['UserName'] = username
 
