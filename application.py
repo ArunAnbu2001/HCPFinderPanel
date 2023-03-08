@@ -158,3 +158,8 @@ def logout():
         pass
 
     return status
+
+@application.route('/get_dashboard_data', methods=['GET', 'POST'])
+def get_dashboard_data():
+    res = db_proxy.get_dashboard_data()
+    return json.dumps(res)
