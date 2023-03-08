@@ -699,6 +699,9 @@ def get_dashboard_data():
         city_list = list(city_dict.values())
         city_cal = []
         if len(city_list) > 0:
+            min_city = min(city_list)
+            if min_city == 1:
+                min_city += 1
             city_cal = [min(city_list), int(sum(city_list)/len(city_list)), max(city_list)]
 
         #top 5 dates
