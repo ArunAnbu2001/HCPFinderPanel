@@ -589,6 +589,168 @@ def update_opt():
                     optout_mail(row['Firstname'],row['Lastname'],row['ContactNumber'],row['City'],row['NPI'],row['Email'])
 
                     return True
+                
+
+def get_dashboard_data():
+    
+    if request.method=="POST":
+
+        conn = mysql.connector.connect(
+            host=str(EnDe.decode(hs)), 
+            user=str(EnDe.decode(us)), 
+            port='3306', 
+            password=str(EnDe.decode(ps)),
+            database=str(EnDe.decode(ds)))
+        
+        month=request.form['month']
+        year=request.form['year']
+
+        df = pd.read_sql_query("Select * from search_logs", conn)
+        hcps = pd.read_sql_query("Select * from register_data", conn)
+        hcps = hcps.rename({'ID':'hcpid'}, axis=1)
+        
+        #dates conversion    
+        for idx, row in df.iterrows():
+            if '-' not in str(row['created_on']):
+                re_date = row['created_on'].replace('/', ' ').replace(',', '')
+                format_date = datetime.datetime.strptime(re_date, '%m %d %Y %H:%M:%S %p').strftime('%m-%d-%Y')
+                df['created_on'] = df['created_on'].replace(row['created_on'], str(format_date))
+                
+
+        df['created_on'] = pd.to_datetime(df['created_on'], errors='coerce')
+        df['month'] =  df['created_on'].dt.month_name()
+        df['year'] =  df['created_on'].dt.year
+
+        df = df.sort_values(by='created_on', ascending=False)
+        df['created_on'] = df['created_on'].astype(str)
+
+        df['year'] = df['year'].astype(str)
+        df = df[(df['month'] == month) & (df['year'] == year)]
+
+
+        #total search
+        search_df = df[df['hcpid'] == 0]
+        total_search = 0
+        if search_df.shape[0] > 0:
+            total_search = search_df.shape[0]
+            
+        #total hcp
+        hcp_df = df[df['hcpid'] > 0]
+        total_hcp = 0
+        if hcp_df.shape[0] > 0:
+            total_hcp = hcp_df.shape[0]
+
+        #lead table
+        hcps = hcp_df.merge(hcps, on='hcpid')
+
+        hcp_dfs = []
+        for idx, row in hcps.iterrows():
+            new_df={"Name":row["Firstname"] + ' ' + row['Lastname'],
+                    "Designation":row["Designation"],
+                    "Address":row["Street"] + ', ' + row["City"] + ', ' + row["State"] + ', ' + row["Zipcode"] + '.',
+                    "ConnectedDate": row['created_on']}
+            hcp_dfs.append(new_df)
+
+
+        # top hcp
+        top_connected_hcp = 0
+        if len(hcp_dfs) > 0 :
+            hcp_dict_df = pd.DataFrame(hcp_dfs)
+            top_hcp = hcp_dict_df['Name'].value_counts()
+            top_hcp = top_hcp.to_dict()
+
+            top_hcp_list = list(top_hcp.keys())
+            top_connected_hcp = top_hcp_list[0]
+
+
+        # top week hcp
+        top_week_hcp_df = pd.DataFrame(hcp_dfs)
+        top_week_names = []
+        if not top_week_hcp_df.empty:
+            top_week_dates = top_week_hcp_df["ConnectedDate"].explode().unique()[:7]
+            top_week_hcp_df =  top_week_hcp_df[top_week_hcp_df['ConnectedDate'] >= top_week_dates[-1]]
+
+            top_week_name_cnt = top_week_hcp_df['Name'].value_counts()
+            top_week_names = list(top_week_name_cnt.to_dict().keys())
+
+        top_week_designation = []
+        for name in top_week_names:
+            top_week_designation.append(str(top_week_hcp_df[top_week_hcp_df['Name']==name]['Designation'].values[0])) 
+        
+        #city details
+        zipcodes_df = search_df['zipcode_searched'].value_counts()
+        zipcodes_dict = zipcodes_df.to_dict()
+
+        city_dict = {}
+        for key, val in zipcodes_dict.items():
+            zipcode = engine.by_zipcode(key)
+
+            if str(zipcode.state) in city_dict:
+                val += int(city_dict[zipcode.state])
+                city_dict[zipcode.state] = val
+            else:
+                city_dict[zipcode.state] = val
+
+        #city calculation
+        city_list = list(city_dict.values())
+        city_cal = []
+        if len(city_list) > 0:
+            city_cal = [min(city_list), int(sum(city_list)/len(city_list)), max(city_list)]
+
+        #top 5 dates
+        dates_df = search_df['created_on'].value_counts()
+        dates_dict = dates_df.to_dict()
+        hcp_dates_df = hcp_df['created_on'].value_counts()
+        hcp_dates_dict = hcp_dates_df.to_dict()
+
+        top_dates = list(dates_dict.keys())
+        search_date_cnt = list(dates_dict.values())
+        
+        hcp_date_cnt = []
+        if len(top_dates) > 0:
+            for i in top_dates:
+                if i in hcp_dates_dict:
+                    hcp_date_cnt.append(hcp_dates_dict[i])
+
+        #top city
+        top_city_dict = {}
+        for key, val in zipcodes_dict.items():
+            zipcode = engine.by_zipcode(key)
+            top_city_dict[zipcode.major_city] = val
+        
+        top_city_dict = {k:v for i, (k, v) in enumerate(top_city_dict.items()) if i < 6}
+        top_cities = list(top_city_dict.keys())
+        top_cities_cnt = list(top_city_dict.values())
+
+        engine.close()
+
+        data = {}
+        data["total_search"] = total_search
+        data["total_hcp"] = total_hcp
+        data["top_connected_hcp"] = top_connected_hcp
+        data["city_count"] = city_dict
+        
+        data["city_cal"] = city_cal
+
+        data["top_dates"] = top_dates[:5]
+        data["search_date_cnt"] = search_date_cnt[:5]
+        data["hcp_date_cnt"] = hcp_date_cnt[:5]
+
+        if len(top_cities) > 0:
+            data['top_one_city'] = top_cities[0]
+            data['top_one_city_cnt'] = top_cities_cnt[0]
+
+        data["top_cities"] = top_cities[1:]
+        data["top_cities_cnt"] = top_cities_cnt[1:]
+
+        data["top_week_names"] = top_week_names[:5]
+        data["top_week_designation"] =top_week_designation[:5]
+
+        data["hcp_table_data"] = hcp_dfs
+
+        return data
+    
+
 
 def get_gmkey():
     return API_KEY
