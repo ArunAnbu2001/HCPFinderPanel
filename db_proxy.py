@@ -720,7 +720,13 @@ def get_dashboard_data():
         top_city_dict = {}
         for key, val in zipcodes_dict.items():
             zipcode = engine.by_zipcode(key)
-            top_city_dict[zipcode.major_city] = val
+            
+            if str(zipcode.major_city) in top_city_dict:
+                val += int(top_city_dict[zipcode.major_city])
+                top_city_dict[zipcode.major_city] = val
+            else:
+                top_city_dict[zipcode.major_city] = val
+                
         
         top_city_dict = {k:v for i, (k, v) in enumerate(top_city_dict.items()) if i < 6}
         top_cities = list(top_city_dict.keys())
