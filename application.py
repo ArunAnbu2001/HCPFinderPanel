@@ -18,7 +18,7 @@ def home():
     except:
         return render_template('login.html')
     
-   return render_template('land.html')
+    return render_template('land.html')
 
 @application.route('/profile')
 def profile():
@@ -28,7 +28,7 @@ def profile():
     except:
         return render_template('login.html')
     
-   return render_template('profilepage2.html') 
+    return render_template('profilepage2.html') 
 
 @application.route('/changepassword')
 def changepassword():
@@ -38,7 +38,7 @@ def changepassword():
     except:
         return render_template('login.html')
     
-   return render_template('changepwd.html') 
+    return render_template('changepwd.html') 
 
 @application.route('/profile_edit')
 def profile_edit():
@@ -48,7 +48,7 @@ def profile_edit():
     except:
         return render_template('login.html')
     
-   return render_template('profileedit.html') 
+    return render_template('profileedit.html') 
 
 @application.route('/')
 def login():
