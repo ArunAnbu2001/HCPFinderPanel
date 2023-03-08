@@ -727,7 +727,7 @@ def get_dashboard_data():
             else:
                 top_city_dict[zipcode.major_city] = val
                 
-        
+        top_city_dict = dict(sorted(top_city_dict.items(), key=lambda kv: kv[1], reverse=True))
         top_city_dict = {k:v for i, (k, v) in enumerate(top_city_dict.items()) if i < 6}
         top_cities = list(top_city_dict.keys())
         top_cities_cnt = list(top_city_dict.values())
