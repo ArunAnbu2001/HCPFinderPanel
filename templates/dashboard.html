@@ -504,6 +504,15 @@
                 }
                 
                 $('#processing').hide();
+            },
+            error: function(err) {
+                toastr.error("Something went wrong", "Error!", {
+                    showMethod: "slideDown",
+                    hideMethod: "slideUp",
+                    timeOut: 3000
+                });
+                
+                $('#processing').hide();
             }
         });
     }
