@@ -615,10 +615,13 @@ def get_dashboard_data():
         
         #dates conversion    
         for idx, row in df.iterrows():
-            if '-' not in str(row['created_on']):
-                re_date = row['created_on'].replace('/', ' ').replace(',', '')
-                format_date = datetime.datetime.strptime(re_date, '%m %d %Y %H:%M:%S %p').strftime('%m-%d-%Y')
-                df['created_on'] = df['created_on'].replace(row['created_on'], str(format_date))
+            try:
+                if '-' not in str(row['created_on']):
+                    re_date = row['created_on'].replace('/', ' ').replace(',', '')
+                    format_date = datetime.datetime.strptime(re_date, '%m %d %Y %H:%M:%S %p').strftime('%m-%d-%Y')
+                    df['created_on'] = df['created_on'].replace(row['created_on'], str(format_date))
+            except:
+                df = df[df['created_on'] != row['created_on']]
                 
 
         df['created_on'] = pd.to_datetime(df['created_on'], errors='coerce')
