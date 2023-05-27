@@ -55,13 +55,7 @@ def login():
     return render_template('login.html')
 
 @application.route('/register_click')
-def register_click():
-    try:
-        if session["email"] == "":
-            return render_template('login.html')
-    except:
-        return render_template('login.html')
-    
+def register_click():    
     return render_template('register1.html')
 
 @application.route('/doctor_details')
