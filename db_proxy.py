@@ -221,8 +221,13 @@ def bulk_upload():
                 try:
                     firstname = row['Firstname']
                     lastname = row['Lastname']
-                    email=row['Email']
+                    email=str(row['Email'])
+                    if email == "nan":
+                        email = ""
                     password=row['Password']
+                    if password != None:
+                        if str(password) != "" and str(password) != "nan":
+                            password = EnDe.encode(password).decode()
                     password = EnDe.encode(password).decode()
                     contactnumber= row['ContactNumber']
                     designation=row['Speciality']
