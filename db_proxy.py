@@ -224,10 +224,10 @@ def bulk_upload():
                     email=str(row['Email'])
                     if email == "nan":
                         email = ""
-                    password=row['Password']
-                    if password != None:
-                        if str(password) != "" and str(password) != "nan":
-                            password = EnDe.encode(password).decode()
+                    # password=row['Password']
+                    # if password != None:
+                        # if str(password) != "" and str(password) != "nan":
+                            # password = EnDe.encode(password).decode()
                     # password = EnDe.encode(password).decode()
                     contactnumber= row['ContactNumber']
                     designation=row['Speciality']
@@ -260,7 +260,7 @@ def bulk_upload():
                     conn.commit()
                     cur.close()
                 except Exception as e:
-                    print(str(e))
+                    print("Error: ", str(e))
                 # else:
                     # status = email
                     # break
