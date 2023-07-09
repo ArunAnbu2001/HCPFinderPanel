@@ -228,7 +228,7 @@ def bulk_upload():
                     if password != None:
                         if str(password) != "" and str(password) != "nan":
                             password = EnDe.encode(password).decode()
-                    password = EnDe.encode(password).decode()
+                    # password = EnDe.encode(password).decode()
                     contactnumber= row['ContactNumber']
                     designation=row['Speciality']
                     street=row['Street']
