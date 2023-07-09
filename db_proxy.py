@@ -218,45 +218,47 @@ def bulk_upload():
 
             data = pd.read_excel(file_path, engine='openpyxl')
             for idx, row in data.iterrows():
-                firstname = row['Firstname']
-                lastname = row['Lastname']
-                email=row['Email']
-                password=row['Password']
-                password = EnDe.encode(password).decode()
-                contactnumber= row['ContactNumber']
-                designation=row['Speciality']
-                street=row['Street']
-                city=row['City']
-                state=row['State']
-                country=row['Country']
-                zipcode=row['Zipcode']
-                npi=row['NPI']
-
-                check_email = pd.read_sql_query("Select Email from register_data Where Email='" +email+"'", conn)
-
-                if check_email.empty:
+                try:
+                    firstname = row['Firstname']
+                    lastname = row['Lastname']
+                    email=row['Email']
+                    password=row['Password']
+                    password = EnDe.encode(password).decode()
+                    contactnumber= row['ContactNumber']
+                    designation=row['Speciality']
+                    street=row['Street']
+                    city=row['City']
+                    state=row['State']
+                    country=row['Country']
+                    zipcode=row['Zipcode']
+                    npi=row['NPI']
+    
+                    # check_email = pd.read_sql_query("Select Email from register_data Where Email='" +email+"'", conn)
+    
+                    # if check_email.empty:
                     address = str(street)+","+str(city)+","+str(state) + \
                     ", United States,"+str(zipcode)
-
+    
                     params = {
                         'key': API_KEY,
                         'address': address
                     }
                     base_url = "https://maps.googleapis.com/maps/api/geocode/json?"
                     response = requests.get(base_url, params=params).json()
-
+    
                     geometry = response['results'][0]['geometry']
                     lat = geometry['location']['lat']
                     lng = geometry['location']['lng']
-
+    
                     cur=conn.cursor()
                     cur.execute("insert into register_data (Firstname,Lastname,Password,ContactNumber,Email,Street,City,State,Country,Zipcode,Designation,NPI,Latitude,Longitude,Status) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",(firstname,lastname,password,contactnumber,email,street,city,state,country,zipcode,designation,npi,lat,lng,'Pending'))
                     conn.commit()
                     cur.close()
-                
-                else:
-                    status = email
-                    break
+                except Exception as e:
+                    print(str(e))
+                # else:
+                    # status = email
+                    # break
 
         return status
 
