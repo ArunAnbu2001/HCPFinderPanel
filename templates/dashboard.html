@@ -85,77 +85,84 @@
                                     <!-- dashboard container -->
                                     <div id="showdata">
                                         <div class="row mt-3">
+                                            <div class="col-xl-3 col-md-6">
+                                                <div class="card bg-c-yellow update-card">
+                                                    <div class="card-block">
+                                                        <div class="row align-items-end">
+                                                            <div class="col-8">
+                                                                <h4 id="total_search" class="text-white">0</h4>
+                                                                <h6 class="text-white m-b-0">Total # of Searches (Users)</h6>
+                                                            </div>
+                                                            <div class="col-4 text-right">
+                                                                <canvas id="update-chart-1" height="50"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-footer">
+                                                        <p class="text-white m-b-0"><i class="feather icon-clock text-white f-14 m-r-10"></i>(30 days)</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3 col-md-6">
+                                                <div class="card bg-c-green update-card">
+                                                    <div class="card-block">
+                                                        <div class="row align-items-end">
+                                                            <div class="col-8">
+                                                                <h4 id="total_hcp" class="text-white">0</h4>
+                                                                <h6 class="text-white m-b-0">Total # of HCPs Connected</h6>
+                                                            </div>
+                                                            <div class="col-4 text-right">
+                                                                <canvas id="update-chart-2" height="50"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-footer">
+                                                        <p class="text-white m-b-0"><i class="feather icon-clock text-white f-14 m-r-10"></i>(30 days)</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3 col-md-6">
+                                                <div class="card bg-c-pink update-card">
+                                                    <div class="card-block">
+                                                        <div class="row align-items-end">
+                                                            <div class="col-8">
+                                                                <h4 id="top_connected_hcp" class="text-white">0</h4>
+                                                                <h6 class="text-white m-b-0">Top Connected HCP</h6>
+                                                            </div>
+                                                            <div class="col-4 text-right">
+                                                                <canvas id="update-chart-3" height="50"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-footer">
+                                                        <p class="text-white m-b-0"><i class="feather icon-clock text-white f-14 m-r-10"></i>(30 days)</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3 col-md-6">
+                                                <div class="card bg-c-lite-green update-card">
+                                                    <div class="card-block">
+                                                        <div class="row align-items-end">
+                                                            <div class="col-8">
+                                                                <h4 id="total_area" class="text-white">0</h4>
+                                                                <h6 class="text-white m-b-0">Total # of Areas Searched</h6>
+                                                            </div>
+                                                            <div class="col-4 text-right">
+                                                                <canvas id="update-chart-4" height="50"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-footer">
+                                                        <p class="text-white m-b-0"><i class="feather icon-clock text-white f-14 m-r-10"></i>(30 days)</p>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                            <!-- tiles start -->
-                                            <div class="col-xl-3 col-md-6">
-                                                <div class="card bg-c-yellow text-white" style="height: 130px;">
-                                                    <div class="card-block">
-                                                        <div class="row align-items-center">
-                                                            <div class="col">
-                                                                <p class="m-b-5">Total # of Searches (Users)</p>
-                                                                <h4 id="total_search" class="m-b-0"></h4>
-                                                                <span>(30 days)</span>
-                                                            </div>
-                                                            <div class="col col-auto text-right">
-                                                                <i class="feather icon-users f-50 text-c-yellow"></i>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-3 col-md-6">
-                                                <div class="card bg-c-green text-white"  style="height: 130px;">
-                                                    <div class="card-block">
-                                                        <div class="row align-items-center">
-                                                            <div class="col">
-                                                                <p class="m-b-5">Total # of HCPs Connected</p>
-                                                                <h4 id="total_hcp" class="m-b-0"></h4>
-                                                                <span>(30 days)</span>
-                                                            </div>
-                                                            <div class="col col-auto text-right">
-                                                                <i class="feather icon-user-plus f-50 text-c-green"></i>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-3 col-md-6">
-                                                <div class="card bg-c-pink text-white" style="height: 130px;">
-                                                    <div class="card-block">
-                                                        <div class="row align-items-center">
-                                                            <div class="col">
-                                                                <p class="m-b-5">Top Connected HCP</p>
-                                                                <h4 id="top_connected_hcp" class="m-b-0"></h4>
-                                                                <span>(30 days)</span>
-                                                            </div>
-                                                            <div class="col col-auto text-right">
-                                                                <i class="feather icon-link f-50 text-c-pink"></i>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-3 col-md-6">
-                                                <div class="card bg-c-blue text-white" style="height: 130px;">
-                                                    <div class="card-block">
-                                                        <div class="row align-items-center">
-                                                            <div class="col">
-                                                                <p class="m-b-5">Total # of Areas Searched</p>
-                                                                <h4 id="total_area" class="m-b-0"></h4>
-                                                                <span>(30 days)</span>
-                                                            </div>
-                                                            <div class="col col-auto text-right">
-                                                                <i class="feather icon-search f-50 text-c-blue"></i>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- tiles start -->
+
 
                                             <!-- charts (map & bar) -->
                                             <!-- map chart -->
-                                            <div class="col-xl-6 col-md-12">
+                                            <div class="col-xl-8 col-md-12">
                                                 <div class="card">
                                                     <div class="card-header">
                                                         <div class="card-header-left ">
@@ -169,17 +176,20 @@
                                                         <div class="row px-5">
                                                             <div class="col-sm">
                                                                 <div class="row">
-                                                                    <div class="col-3" style="background-color: #55abb7;"></div><div class="col-sm">Lower</div>
+                                                                    <div class="col-3" style="background-color: #55abb7;"></div>
+                                                                    <div class="col-sm">Lower</div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm">
                                                                 <div class="row">
-                                                                    <div class="col-3" style="background-color: #c46567;"></div><div class="col-sm">Average</div>
+                                                                    <div class="col-3" style="background-color: #c46567;"></div>
+                                                                    <div class="col-sm">Average</div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm">
                                                                 <div class="row">
-                                                                    <div class="col-3" style="background-color: #ffc100;"></div><div class="col-sm">Higher</div>
+                                                                    <div class="col-3" style="background-color: #ffc100;"></div>
+                                                                    <div class="col-sm">Higher</div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -189,7 +199,7 @@
                                             </div>
 
                                             <!-- grouped bar chart-->
-                                            <div class="col-6">
+                                            <div class="col-4">
                                                 <div class="card">
                                                     <div class="card-header">
                                                         <div class="card-header-left ">
@@ -264,11 +274,11 @@
                                     <div id="hidedata">
                                         <div class="row text-center h-100">
                                             <div class="col-12 text-center">
-                                            <div class="card card-block d-flex" style="height: 120px;margin-top: 50px;">
-                                                <div class="card-body align-items-center d-flex justify-content-center">
-                                                    NO DATA AVAILABLE
+                                                <div class="card card-block d-flex" style="height: 120px;margin-top: 50px;">
+                                                    <div class="card-body align-items-center d-flex justify-content-center">
+                                                        NO DATA AVAILABLE
+                                                    </div>
                                                 </div>
-                                            </div>
                                             </div>
                                         </div>
                                     </div>
@@ -284,14 +294,17 @@
 
 
 <script>
-    function mapChart(data, obj){
+    function mapChart(data, obj) {
         var chartConfig = {
             debug: true,
             type: 'map',
             palette: {
                 pointValue: '{ %zValue }',
                 colors: ['#f1f1f1', '#55abb7', '#c46567', '#ffc100'],
-                ranges: [0, [1, obj["city_cal"][0]], [obj["city_cal"][0]+1, obj["city_cal"][1]], [obj["city_cal"][1], obj["city_cal"][2]]]
+                ranges: [0, [1, obj["city_cal"][0]],
+                    [obj["city_cal"][0] + 1, obj["city_cal"][1]],
+                    [obj["city_cal"][1], obj["city_cal"][2]]
+                ]
             },
             legend: {
                 template: '%icon %value',
@@ -303,18 +316,21 @@
             },
             defaultSeries_shape_padding: 0.02,
             legend_visible: false,
-            defaultPoint_label_autoHide:false,
-            series: [{ id: 'usMap', map: 'us'}]
+            defaultPoint_label_autoHide: false,
+            series: [{
+                id: 'usMap',
+                map: 'us'
+            }]
         };
 
         chartConfig.series[0].points = data;
         var chart = JSC.chart('chartDiv', chartConfig);
     }
-     
-    function barChart(top_dates, search_date_cnt, hcp_date_cnt){ 
+
+    function barChart(top_dates, search_date_cnt, hcp_date_cnt) {
 
         var max_value = Math.max.apply(null, search_date_cnt)
-        if (Math.max.apply(null, search_date_cnt) < Math.max.apply(null, hcp_date_cnt)){
+        if (Math.max.apply(null, search_date_cnt) < Math.max.apply(null, hcp_date_cnt)) {
             max_value = Math.max.apply(null, hcp_date_cnt);
         }
 
@@ -334,41 +350,44 @@
         };
 
         var myBarChart = new Chart(ctx, {
-        type: 'bar',
-        data: data,
-        options: {
-            maintainAspectRatio: false,
-            barValueSpacing: 0,
-            scales: {
-                xAxes: [{
-                    gridLines: {
+            type: 'bar',
+            data: data,
+            options: {
+                maintainAspectRatio: false,
+                barValueSpacing: 0,
+                scales: {
+                    xAxes: [{
+                        gridLines: {
+                            display: false,
+                        }
+                    }],
+                    yAxes: [{
                         display: false,
-                    }
-                }],   
-                yAxes: [{
-                    display: false,
-                    ticks: {
-                        beginAtZero: true,
-                        max: max_value + 1
-                    }
-                }]
-            },
-            plugins: {
-                legend: {
-                    labels: {
-                        padding: 100,
+                        ticks: {
+                            beginAtZero: true,
+                            max: max_value + 1
+                        }
+                    }]
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            padding: 100,
+                        }
                     }
                 }
             }
-        }
         });
 
     }
 
-    function progressBar(top_cities, top_cities_cnt){
+    function progressBar(top_cities, top_cities_cnt) {
         let result = [];
         top_cities.forEach((city, index) => {
-            let obj = {value: top_cities_cnt[index], name: city};
+            let obj = {
+                value: top_cities_cnt[index],
+                name: city
+            };
             result.push(obj);
         });
 
@@ -377,62 +396,66 @@
         var idx = 1;
         var option_dt = {
 
-            timeline : {
+            timeline: {
                 show: true,
-                data : ['Cities'],
-                label : {
-                    formatter : function(s) {
+                data: ['Cities'],
+                label: {
+                    formatter: function(s) {
                         return s.slice(0, 5);
                     }
                 },
-                x:10,
-                y:null,
-                x2:10,
-                y2:0,
-                width:250,
-                height:50,
-                backgroundColor:"rgba(0,0,0,0)",
-                borderColor:"#eaeaea",
-                borderWidth:0,
-                padding:5,
-                controlPosition:"none",
-                autoPlay:false,
-                loop:false,
-                lineStyle:{
-                    width:1,
-                    color:"#bdbdbd",
-                    type:""
+                x: 10,
+                y: null,
+                x2: 10,
+                y2: 0,
+                width: 250,
+                height: 50,
+                backgroundColor: "rgba(0,0,0,0)",
+                borderColor: "#eaeaea",
+                borderWidth: 0,
+                padding: 5,
+                controlPosition: "none",
+                autoPlay: false,
+                loop: false,
+                lineStyle: {
+                    width: 1,
+                    color: "#bdbdbd",
+                    type: ""
                 },
 
             },
-            options : [
-                {
-                    color: ['#4680ff','#FC6180','#93BE52','#FFB64D','#FE8A7D','#69CEC6'],
-                    title : {
+            options: [{
+                    color: ['#4680ff', '#FC6180', '#93BE52', '#FFB64D', '#FE8A7D', '#69CEC6'],
+                    title: {
                         text: '',
                         subtext: ''
                     },
-                    tooltip : {
+                    tooltip: {
                         trigger: 'item',
                         formatter: "{a} <br/>{b} : {c} ({d}%)"
                     },
                     legend: {
                         show: false,
                         x: 'left',
-                        orient:'vertical',
+                        orient: 'vertical',
                         padding: 0,
                         data: top_cities
                     },
                     toolbox: {
-                        show : false,
-                        color : ['#4680ff','#4680ff','#4680ff','#4680ff'],
-                        feature : {
-                            mark : {show: false},
-                            dataView : {show: false, readOnly: true},
-                            magicType : {
+                        show: false,
+                        color: ['#4680ff', '#4680ff', '#4680ff', '#4680ff'],
+                        feature: {
+                            mark: {
+                                show: false
+                            },
+                            dataView: {
+                                show: false,
+                                readOnly: true
+                            },
+                            magicType: {
                                 show: true,
-                                    itemSize:12,
-                                    itemGap: 12,
+                                itemSize: 12,
+                                itemGap: 12,
                                 type: ['pie', 'funnel'],
                                 option: {
                                     funnel: {
@@ -442,35 +465,52 @@
                                         max: 100
                                     },
                                     pie: {
-                                        roseType : 'none',
+                                        roseType: 'none',
                                     }
                                 }
                             },
-                            restore : {show: false},
-                            saveAsImage : {show: true}
+                            restore: {
+                                show: false
+                            },
+                            saveAsImage: {
+                                show: true
+                            }
                         }
-                    }, 
-                    series : [{
-                        name:'Cities',
-                        type:'pie',
-                        radius : [15, '70%'],
-                        roseType : 'radius',
+                    },
+                    series: [{
+                        name: 'Cities',
+                        type: 'pie',
+                        radius: [15, '70%'],
+                        roseType: 'radius',
                         center: ['50%', '45%'],
-                        width: '50%',       // for funnel
-                        itemStyle : {
-                            normal : { label : { show : true }, labelLine : { show : true } },
-                            emphasis : { label : { show : false }, labelLine : {show : false} }
+                        width: '50%', // for funnel
+                        itemStyle: {
+                            normal: {
+                                label: {
+                                    show: true
+                                },
+                                labelLine: {
+                                    show: true
+                                }
+                            },
+                            emphasis: {
+                                label: {
+                                    show: false
+                                },
+                                labelLine: {
+                                    show: false
+                                }
+                            }
                         },
-                        data:result
+                        data: result
                     }]
-                }
-            ] // end options object
+                }] // end options object
         };
 
         myChart.setOption(option_dt);
     }
 
-    function hcp_table(dataTableValues){
+    function hcp_table(dataTableValues) {
         $(".datatables-basic").DataTable({
             destroy: true,
             paging: true,
@@ -511,7 +551,7 @@
             }],
             order: [
                 [0, "asc"]
-            ], 
+            ],
             displayLength: 10,
             lengthMenu: [7, 10, 25, 50, 75, 100],
             responsive: {
@@ -531,12 +571,12 @@
                 }
             }
         });
-        
+
     }
-    
-    function dashboard_data(){
+
+    function dashboard_data() {
         $('#processing').show();
-        
+
         var data = new FormData();
         data.append('month', $('#month').val());
         data.append('year', $('#year').val());
@@ -552,7 +592,7 @@
             data: data,
             success: function(data) {
                 var obj = JSON.parse(data);
-                if (obj['total_search'] != 0){
+                if (obj['total_search'] != 0) {
                     $('#showdata').show();
                     $('#hidedata').hide();
 
@@ -564,26 +604,26 @@
                     var mapStates = 'AL,AK,AZ,AR,CA,CO,CT,DE,FL,GA,HI,ID,IL,IN,IA,KS,KY,LA,ME,MD,MA,MI,MN,MS,MO,MT,NE,NV,NH,NJ,NM,NY,NC,ND,OH,OK,OR,PA,RI,SC,SD,TN,TX,UT,VT,VA,WA,WV,WI,WY'.split(',');
 
                     var map_data = [];
-                    for (var i = 0; i < mapStates.length; i++){
+                    for (var i = 0; i < mapStates.length; i++) {
                         var map_dict = {};
                         var city_count = obj['city_count'];
-                        if (Object.keys(city_count).includes(mapStates[i])){
+                        if (Object.keys(city_count).includes(mapStates[i])) {
                             map_dict['map'] = "US." + mapStates[i];
                             map_dict['z'] = city_count[mapStates[i]];
                         } else {
                             map_dict['map'] = "US." + mapStates[i];
                             map_dict['z'] = 0;
                         }
-                        
+
                         map_data.push(map_dict);
                     }
-                    
+
                     mapChart(map_data, obj);
-                    
+
                     $('#barchart').empty();
                     $('#barchart').append('<canvas id="myChart" height="400px"></canvas>');
                     barChart(obj['top_dates'], obj['search_date_cnt'], obj['hcp_date_cnt']);
-                    
+
                     $('#top_one_city').text(obj['top_one_city']);
                     $('#top_one_city_cnt').text(obj['top_one_city_cnt']);
 
@@ -593,7 +633,7 @@
 
                     $('#top_week_hcps').empty();
                     for (var i = 0; i < obj['top_week_names'].length; i++) {
-                        $('#top_week_hcps').append('<p style="text-align:right"><span style="float:left">'+ obj['top_week_names'][i] +'</span>'+ obj['top_week_designation'][i] +'</p>');
+                        $('#top_week_hcps').append('<p style="text-align:right"><span style="float:left">' + obj['top_week_names'][i] + '</span>' + obj['top_week_designation'][i] + '</p>');
                     }
 
                     var dataTableValues = []
@@ -602,11 +642,39 @@
                     }
                     hcp_table(dataTableValues);
 
+                    var ctx = document.getElementById('update-chart-1').getContext("2d");
+                    var myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: valincome('#fff', [15, 20, 25, 25, 30], '#fff'),
+                        options: valincomebuildoption(),
+                    });
+
+                    var ctx = document.getElementById('update-chart-2').getContext("2d");
+                    var myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: valincome('#fff', [5, 10, 25, 30, 40], '#fff'),
+                        options: valincomebuildoption(),
+                    });
+
+                    var ctx = document.getElementById('update-chart-3').getContext("2d");
+                    var myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: valincome('#fff', [12, 10, 5, 20, 25], '#fff'),
+                        options: valincomebuildoption(),
+                    });
+
+                    var ctx = document.getElementById('update-chart-4').getContext("2d");
+                    var myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: valincome('#fff', [10, 20, 35, 25, 45], '#fff'),
+                        options: valincomebuildoption(),
+                    });
+
                 } else {
                     $('#showdata').hide();
                     $('#hidedata').show();
                 }
-                
+
                 $('#processing').hide();
             },
             error: function(err) {
@@ -615,22 +683,101 @@
                     hideMethod: "slideUp",
                     timeOut: 3000
                 });
-                
+
                 $('#processing').hide();
             }
         });
     }
 
+    function valincome(a, b, f) {
+        if (f == null) {
+            f = "rgba(0,0,0,0)";
+        }
+        return {
+            labels: ["1", "2", "3", "4", "5"],
+            datasets: [{
+                label: "",
+                borderColor: a,
+                borderWidth: 0,
+                hitRadius: 30,
+                pointRadius: 0,
+                pointHoverRadius: 4,
+                pointBorderWidth: 2,
+                pointHoverBorderWidth: 12,
+                pointBackgroundColor: Chart.helpers.color("#000000").alpha(0).rgbString(),
+                pointBorderColor: a,
+                pointHoverBackgroundColor: a,
+                pointHoverBorderColor: Chart.helpers.color("#000000").alpha(.1).rgbString(),
+                fill: true,
+                backgroundColor: Chart.helpers.color(f).alpha(1).rgbString(),
+                data: b,
+            }]
+        };
+    }
+
+    function valincomebuildoption() {
+        return {
+            maintainAspectRatio: false,
+            title: {
+                display: false,
+            },
+            tooltips: {
+                enabled: false,
+            },
+            legend: {
+                display: false
+            },
+            hover: {
+                mode: 'index'
+            },
+            scales: {
+                xAxes: [{
+                    display: false,
+                    gridLines: false,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Month'
+                    }
+                }],
+                yAxes: [{
+                    display: false,
+                    gridLines: false,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Value'
+                    },
+                    ticks: {
+                        min: 1,
+                    }
+                }]
+            },
+            elements: {
+                point: {
+                    radius: 4,
+                    borderWidth: 12
+                }
+            },
+            layout: {
+                padding: {
+                    left: 10,
+                    right: 0,
+                    top: 15,
+                    bottom: 0
+                }
+            }
+        };
+    }
+
     $(document).ready(function() {
-        
+
         var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
         $('#month').val(months[new Date().getMonth()]);
 
         var currYear = new Date().getFullYear();
 
         $("#year").find('option').remove();
-        for (var i = 2022; i<=currYear; i++) {
-            if (i == new Date().getFullYear()){
+        for (var i = 2022; i <= currYear; i++) {
+            if (i == new Date().getFullYear()) {
                 $("#year").append('<option selected value="' + i + '">' + i + '</option>');
             } else {
                 $("#year").append('<option value="' + i + '">' + i + '</option>');
@@ -639,8 +786,7 @@
 
         dashboard_data();
     });
-    
 </script>
 
 
-{% endblock %}    
+{% endblock %}
