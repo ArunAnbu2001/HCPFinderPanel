@@ -6,242 +6,280 @@
     }
 </style>
 
+<!-- Required Fremwork -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename= 'files/bower_components/bootstrap/css/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename= 'files/assets/pages/chart/radial/css/radial.css') }}" type="text/css" media="all">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename= 'files/assets/icon/feather/css/feather.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename= 'files/assets/css/style.css') }}">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,800" rel="stylesheet">
+
+<!-- Data Table Css -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='files/bower_components/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='files/assets/pages/data-table/css/buttons.dataTables.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='files/bower_components/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}">
+
 <script type="text/javascript" src="https://code.jscharting.com/latest/jscharting.js"></script>
 <script type="text/javascript" src="https://code.jscharting.com/latest/modules/maps.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.bundle.js"></script>
 
+<script src="{{ url_for('static', filename= 'files/assets/pages/chart/echarts/js/echarts-all.js') }}" type="text/javascript"></script>
 
-<!-- container -->
-<div class="container content-container">
+<!-- data-table js -->
+<script src="{{ url_for('static', filename='files/bower_components/datatables.net/js/jquery.dataTables.min.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='files/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='files/assets/pages/data-table/js/jszip.min.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='files/assets/pages/data-table/js/pdfmake.min.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='files/assets/pages/data-table/js/vfs_fonts.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='files/bower_components/datatables.net-buttons/js/buttons.print.min.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='files/bower_components/datatables.net-buttons/js/buttons.html5.min.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='files/bower_components/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='files/bower_components/datatables.net-responsive/js/dataTables.responsive.min.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='files/bower_components/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}" type="text/javascript"></script>
 
-    <!-- title & filter -->
-    <div class="row mb-3">
-        <div class="col-6">
-            <p class="fw-bold h5">Hi, Welcome Back</p>
-        </div>
-        <div class="col-6">
-            <div class="row">
-                <div class="col">
-                    <label for="month" class="fw-bold">Month:</label>
-                    <select class="form-select" name="month" id="month" onchange="dashboard_data();">
-                        <option value='January'>January</option>
-                        <option value='February'>February</option>
-                        <option value='March'>March</option>
-                        <option value='April'>April</option>
-                        <option value='May'>May</option>
-                        <option value='June'>June</option>
-                        <option value='July'>July</option>
-                        <option value='August'>August</option>
-                        <option value='September'>September</option>
-                        <option value='October'>October</option>
-                        <option value='November'>November</option>
-                        <option value='December'>December</option>
-                    </select>
-                </div>
-                <div class="col">
-                    <label for="year" class="fw-bold">Year:</label>
-                    <select class="form-select" name="year" id="year" onchange="dashboard_data();">
-                        <option value='2022'>2022</option>
-                        <option value='2023'>2023</option>
-                    </select>
+
+<!-- Pre-loader end -->
+<div id="pcoded" class="pcoded mt-5">
+    <div class="pcoded-overlay-box"></div>
+    <div class="pcoded-container navbar-wrapper">
+
+        <div class="pcoded-main-container">
+            <div class="pcoded-wrapper">
+
+                <div class="pcoded-content">
+                    <div class="pcoded-inner-content">
+                        <div class="main-body">
+                            <div class="page-wrapper">
+                                <div class="page-body">
+
+                                    <!-- Month & Year Dropdown start -->
+                                    <div class="row">
+                                        <div class="col-6"></div>
+                                        <div class="col-3">
+                                            <label for="month" class="fw-bold">Month:</label>
+                                            <select class="form-select" name="month" id="month" onchange="dashboard_data();">
+                                                <option value='January'>January</option>
+                                                <option value='February'>February</option>
+                                                <option value='March'>March</option>
+                                                <option value='April'>April</option>
+                                                <option value='May'>May</option>
+                                                <option value='June'>June</option>
+                                                <option value='July'>July</option>
+                                                <option value='August'>August</option>
+                                                <option value='September'>September</option>
+                                                <option value='October'>October</option>
+                                                <option value='November'>November</option>
+                                                <option value='December'>December</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-3">
+                                            <label for="year" class="fw-bold">Year:</label>
+                                            <select class="form-select" name="year" id="year" onchange="dashboard_data();">
+                                                <option value='2022'>2022</option>
+                                                <option value='2023'>2023</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!-- Month & Year Dropdown start -->
+
+                                    <!-- dashboard container -->
+                                    <div id="showdata">
+                                        <div class="row mt-3">
+
+                                            <!-- tiles start -->
+                                            <div class="col-xl-3 col-md-6">
+                                                <div class="card bg-c-yellow text-white" style="height: 130px;">
+                                                    <div class="card-block">
+                                                        <div class="row align-items-center">
+                                                            <div class="col">
+                                                                <p class="m-b-5">Total # of Searches (Users)</p>
+                                                                <h4 id="total_search" class="m-b-0"></h4>
+                                                                <span>(30 days)</span>
+                                                            </div>
+                                                            <div class="col col-auto text-right">
+                                                                <i class="feather icon-users f-50 text-c-yellow"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3 col-md-6">
+                                                <div class="card bg-c-green text-white"  style="height: 130px;">
+                                                    <div class="card-block">
+                                                        <div class="row align-items-center">
+                                                            <div class="col">
+                                                                <p class="m-b-5">Total # of HCPs Connected</p>
+                                                                <h4 id="total_hcp" class="m-b-0"></h4>
+                                                                <span>(30 days)</span>
+                                                            </div>
+                                                            <div class="col col-auto text-right">
+                                                                <i class="feather icon-user-plus f-50 text-c-green"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3 col-md-6">
+                                                <div class="card bg-c-pink text-white" style="height: 130px;">
+                                                    <div class="card-block">
+                                                        <div class="row align-items-center">
+                                                            <div class="col">
+                                                                <p class="m-b-5">Top Connected HCP</p>
+                                                                <h4 id="top_connected_hcp" class="m-b-0"></h4>
+                                                                <span>(30 days)</span>
+                                                            </div>
+                                                            <div class="col col-auto text-right">
+                                                                <i class="feather icon-link f-50 text-c-pink"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3 col-md-6">
+                                                <div class="card bg-c-blue text-white" style="height: 130px;">
+                                                    <div class="card-block">
+                                                        <div class="row align-items-center">
+                                                            <div class="col">
+                                                                <p class="m-b-5">Total # of Areas Searched</p>
+                                                                <h4 id="total_area" class="m-b-0"></h4>
+                                                                <span>(30 days)</span>
+                                                            </div>
+                                                            <div class="col col-auto text-right">
+                                                                <i class="feather icon-search f-50 text-c-blue"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- tiles start -->
+
+                                            <!-- charts (map & bar) -->
+                                            <!-- map chart -->
+                                            <div class="col-xl-6 col-md-12">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <div class="card-header-left ">
+                                                            <h5> # of Searches for HCPs</h5>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-block-big">
+                                                        <div id="chartDiv" style="max-width: 740px;height: 430px;margin: 0px auto;"></div>
+                                                    </div>
+                                                    <div class="card-footer border-0">
+                                                        <div class="row px-5">
+                                                            <div class="col-sm">
+                                                                <div class="row">
+                                                                    <div class="col-3" style="background-color: #55abb7;"></div><div class="col-sm">Lower</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm">
+                                                                <div class="row">
+                                                                    <div class="col-3" style="background-color: #c46567;"></div><div class="col-sm">Average</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm">
+                                                                <div class="row">
+                                                                    <div class="col-3" style="background-color: #ffc100;"></div><div class="col-sm">Higher</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <!-- grouped bar chart-->
+                                            <div class="col-6">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <div class="card-header-left ">
+                                                            <h5>Users and HCPs Report</h5>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-block-big">
+                                                        <div id="barchart" style="max-width: 740px;height: 430px !important;margin: 0px auto;">
+                                                            <canvas id="myChart"></canvas>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-footer border-0"><br></div>
+                                                </div>
+                                            </div>
+
+                                            <!-- search detai -->
+                                            <div class="col-12">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <div class="card-header-left ">
+                                                            <h5>Search Detailed Report</h5>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-block-big">
+                                                        <div class="row">
+                                                            <div class="col-4 text-center py-5">
+                                                                <p style="margin-top: 10%;">Total Number of Searches in</p>
+                                                                <p class="h2"><b id="top_one_city"></b></p>
+                                                                <p class="h1"><b id="top_one_city_cnt"></b></p>
+                                                            </div>
+                                                            <div id="progress" class="col-4">
+                                                            </div>
+                                                            <div class="col-4 text-center py-5">
+                                                                <p class="text-primary fw-bold text-decoration-underline">This week top connected HCPs</p>
+                                                                <div id="top_week_hcps"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- grouped bar chart-->
+                                            <div class="col-12">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <div class="card-header-left ">
+                                                            <h5>Lead HCPs Details</h5>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-block-big">
+                                                        <div class="dt-responsive table-responsive">
+                                                            <table class="datatables-basic table compact table-striped table-bordered nowrap" style="width: 100%;">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>#</th>
+                                                                        <th>Name</th>
+                                                                        <th>Designation</th>
+                                                                        <th>Address</th>
+                                                                        <th>HCP Connected Date</th>
+                                                                    </tr>
+                                                                </thead>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-footer border-0"><br></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- no data container -->
+                                    <div id="hidedata">
+                                        <div class="row text-center h-100">
+                                            <div class="col-12 text-center">
+                                            <div class="card card-block d-flex" style="height: 120px;margin-top: 50px;">
+                                                <div class="card-body align-items-center d-flex justify-content-center">
+                                                    NO DATA AVAILABLE
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- dashboard container -->
-    <div id="showdata">
-
-        <!-- tiles -->
-        <div class="row">
-            <div class="col-lg-3 col-sm-6 col-12 d-flex align-items-center">
-                <div class="card  border-start-primary py-0">
-                    <div class="card-body">
-                        <div class="row align-items-center no-gutters">
-                            <div class="text-secondary text-center mb-3">
-                                <span>Total # of Searches (Users)</span>
-                            </div>
-                            <div class="col me-2">
-                                <div class="text-dark h2 mb-0"><span id="total_search"></span></div>
-                            </div>
-                            <div class="col-auto"><i class="fas fa-user fa-2x text-gray-300"></i></div>
-                            <div class="text-secondary"><span>(30 days)</span></div>                   
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6 col-12 d-flex align-items-center">
-                <div class="card  border-start-primary py-0">
-                    <div class="card-body">
-                        <div class="row align-items-center no-gutters">
-                            <div class="text-secondary text-center mb-3">
-                                <span>Total # of HCPs Connected</span>
-                            </div>
-                            <div class="col me-2">
-                                <div class="text-dark h2 mb-0"><span id="total_hcp"></span></div>
-                            </div>
-                            <div class="col-auto"><i class="fas fa-book-open fa-2x text-gray-300"></i></div>
-                            <div class="text-secondary"><span>(30 days)</span></div>                   
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6 col-12 d-flex align-items-center">
-                <div class="card  border-start-primary py-0">
-                    <div class="card-body">
-                        <div class="row align-items-center no-gutters">
-                            <div class="text-secondary text-center mb-3">
-                                <span>Top Connected HCP</span>
-                            </div>
-                            <div class="col me-2">
-                                <div class="text-dark h6 mb-0"><span id="top_connected_hcp"></span></div>
-                            </div>
-                            <div class="col-auto"><i class="fas fa-link fa-2x text-gray-300"></i></div>
-                            <div class="text-secondary"><span>(30 days)</span></div>                   
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6 col-12 d-flex align-items-center">
-                <div class="card  border-start-primary py-0">
-                    <div class="card-body">
-                        <div class="row align-items-center no-gutters">
-                            <div class="text-secondary text-center mb-3">
-                                <span>Total # of Areas Searched</span>
-                            </div>
-                            <div class="col me-2">
-                                <div class="text-dark h2 mb-0"><span id="total_area"></span></div>
-                            </div>
-                            <div class="col-auto"><i class="fas fa-search fa-2x text-gray-300"></i></div>
-                            <div class="text-secondary"><span>(30 days)</span></div>                   
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- charts (map & bar) -->
-        <div class="row gx-5">
-
-            <!-- map chart -->
-            <div class="col-8">
-                <div class="card  border-start-primary py-2">
-                    <div class="card-body">
-                        <div class="text-secondary fw-bold h4 mb-3">
-                            <span> # of Searches for HCPs</span>
-                        </div>
-                        <div id="chartDiv" style="max-width: 740px;height: 480px;margin: 0px auto;"></div>
-                    </div>
-                    <div class="card-footer border-0">
-                        <div class="row px-5">
-                            <div class="col-sm">
-                                <div class="row">
-                                    <div class="col-3" style="background-color: #55abb7;"></div><div class="col-sm">Lower</div>
-                                </div>
-                            </div>
-                            <div class="col-sm">
-                                <div class="row">
-                                    <div class="col-3" style="background-color: #c46567;"></div><div class="col-sm">Average</div>
-                                </div>
-                            </div>
-                            <div class="col-sm">
-                                <div class="row">
-                                    <div class="col-3" style="background-color: #ffc100;"></div><div class="col-sm">Higher</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- grouped bar chart-->
-            <div class="col-4">
-                <div class="card border-start-primary py-2">
-                    <div class="card-body">
-                        <div class="text-secondary fw-bold h4 mb-3">
-                            <span>Users and HCPs Report</span>
-                        </div>
-                        <div id="barchart" style="max-width: 740px;height: 480px !important;margin: 0px auto;">
-                            <canvas id="myChart" ></canvas>
-                        </div>
-                    </div>
-                    <div class="card-footer border-0"><br></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- search chart -->
-        <div class="row">
-            <div class="card  border-start-primary py-2">
-                <div class="card-body">
-                    <div class="mb-4">
-                        <div class="text-secondary fw-bold h4 mb-3">
-                            <span>Search Detailed Report</span>
-                        </div>
-                        <div class="row">
-                            <div class="col-4 text-center py-5">
-                                <p style="margin-top: 20%;">Total Number of Searches in</p>
-                                <p class="h2"><b id="top_one_city"></b></p>
-                                <p class="h1"><b id="top_one_city_cnt"></b></p>
-                            </div>
-                            <div id="progress" class="col-4">
-                                <canvas id="progressbar"></canvas>
-                            </div>
-                            <div class="col-4 text-center py-5">
-                                <p class="text-primary fw-bold text-decoration-underline">This week top connected HCPs</p>
-                                <div id="top_week_hcps"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>  
-        </div>
-        
-        <!-- table -->
-        <div class="row">
-            <div class="card  border-start-primary py-2">
-                <div class="card-body">
-                    <div class="mb-4">
-                        <div class="text-secondary fw-bold h4 mb-3">
-                            <span>Lead HCPs Details</span>
-                        </div>
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <table class="datatables-basic table" style="width: 100%;">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Name</th>
-                                                <th>Designation</th>
-                                                <th>Address</th>
-                                                <th>HCP Connected Date</th>
-                                            </tr>
-                                        </thead>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>  
-                    </div>
-                </div>
-            </div>  
-        </div>
-    </div>
- 
-    <!-- no data container -->
-    <div id="hidedata">
-        <div class="row text-center h-100">
-            <div class="col-12 text-center">
-              <div class="card card-block d-flex" style="height: 120px;margin-top: 50px;">
-                <div class="card-body align-items-center d-flex justify-content-center">
-                    NO DATA AVAILABLE
-                </div>
-              </div>
-            </div>
-        </div>
-    </div>
-    
 </div>
 
 
@@ -328,42 +366,108 @@
     }
 
     function progressBar(top_cities, top_cities_cnt){
+        let result = [];
+        top_cities.forEach((city, index) => {
+            let obj = {value: top_cities_cnt[index], name: city};
+            result.push(obj);
+        });
 
-        var ctx = document.getElementById('progressbar').getContext('2d');
-		var chart = new Chart(ctx, {
-			type: 'horizontalBar',
-			data: {
-				labels: top_cities,
-				datasets: [{
-					label: 'Count',
-					data: top_cities_cnt,
-					backgroundColor: ['#6cbe0d', '#f5a521', '#ff4747', '#96be25', '#be4d25'],
-					borderWidth: 1
-				}]
-			},
-			options: {
-				responsive: true,
-				maintainAspectRatio: false,
-				legend: {
-					display: false
-				},
-				scales: {
-					xAxes: [{
-                        display: false,
-						ticks: {
-							beginAtZero: true,
-                            max: Math.max.apply(null, top_cities_cnt) + 1
-						}
-					}],
-					yAxes: [{
-                        gridLines: {
-                            display: false,
+        var myChart = echarts.init(document.getElementById('progressbar'));
+
+        var idx = 1;
+        var option_dt = {
+
+            timeline : {
+                show: true,
+                data : ['Cities'],
+                label : {
+                    formatter : function(s) {
+                        return s.slice(0, 5);
+                    }
+                },
+                x:10,
+                y:null,
+                x2:10,
+                y2:0,
+                width:250,
+                height:50,
+                backgroundColor:"rgba(0,0,0,0)",
+                borderColor:"#eaeaea",
+                borderWidth:0,
+                padding:5,
+                controlPosition:"none",
+                autoPlay:false,
+                loop:false,
+                lineStyle:{
+                    width:1,
+                    color:"#bdbdbd",
+                    type:""
+                },
+
+            },
+            options : [
+                {
+                    color: ['#4680ff','#FC6180','#93BE52','#FFB64D','#FE8A7D','#69CEC6'],
+                    title : {
+                        text: '',
+                        subtext: ''
+                    },
+                    tooltip : {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b} : {c} ({d}%)"
+                    },
+                    legend: {
+                        show: false,
+                        x: 'left',
+                        orient:'vertical',
+                        padding: 0,
+                        data: top_cities
+                    },
+                    toolbox: {
+                        show : false,
+                        color : ['#4680ff','#4680ff','#4680ff','#4680ff'],
+                        feature : {
+                            mark : {show: false},
+                            dataView : {show: false, readOnly: true},
+                            magicType : {
+                                show: true,
+                                    itemSize:12,
+                                    itemGap: 12,
+                                type: ['pie', 'funnel'],
+                                option: {
+                                    funnel: {
+                                        x: '10%',
+                                        width: '80%',
+                                        funnelAlign: 'center',
+                                        max: 100
+                                    },
+                                    pie: {
+                                        roseType : 'none',
+                                    }
+                                }
+                            },
+                            restore : {show: false},
+                            saveAsImage : {show: true}
+                        }
+                    }, 
+                    series : [{
+                        name:'Cities',
+                        type:'pie',
+                        radius : [15, '70%'],
+                        roseType : 'radius',
+                        center: ['50%', '45%'],
+                        width: '50%',       // for funnel
+                        itemStyle : {
+                            normal : { label : { show : true }, labelLine : { show : true } },
+                            emphasis : { label : { show : false }, labelLine : {show : false} }
                         },
-                        barPercentage: 0.3
-					}]
-				}
-			}
-		});
+                        data:result
+                    }]
+                }
+            ] // end options object
+        };
+
+        myChart.setOption(option_dt);
     }
 
     function hcp_table(dataTableValues){
@@ -484,7 +588,7 @@
                     $('#top_one_city_cnt').text(obj['top_one_city_cnt']);
 
                     $('#progress').empty();
-                    $('#progress').append('<canvas id="progressbar"></canvas>');
+                    $('#progress').append('<div id="progressbar" style="height:300px"></div>');
                     progressBar(obj['top_cities'], obj['top_cities_cnt']);
 
                     $('#top_week_hcps').empty();
